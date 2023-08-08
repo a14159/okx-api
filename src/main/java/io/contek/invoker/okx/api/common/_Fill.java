@@ -1,23 +1,25 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Fill {
 
   public String instType;
   public String instId;
-  public String tradeId;
-  public String ordId;
+  public long tradeId;
+  public long ordId;
   public String clOrdId;
-  public String billId;
+  public long billId;
   public String tag;
-  public String fillPx;
-  public String fillSz;
+  public BigDecimal fillPx;
+  public BigDecimal fillSz;
   public String side;
   public String posSide;
   public String execType;
   public String feeCcy;
-  public String fee;
-  public String ts;
+  public BigDecimal fee;
+  public long ts;
+  public long fillTime;
 }

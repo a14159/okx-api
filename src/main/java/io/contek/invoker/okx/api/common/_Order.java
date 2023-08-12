@@ -1,14 +1,15 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Order {
 
-  public String accFillSz;
+  public BigDecimal accFillSz;
   public String amendResult;
-  public String avgPx;
-  public String cTime;
+  public BigDecimal avgPx;
+  public long cTime;
   public String category;
   public String ccy;
   public String clOrdId;
@@ -25,11 +26,11 @@ public class _Order {
   public String instId;
   public String instType;
   public String lever;
-  public String ordId;
+  public long ordId;
   public String ordType;
   public String pnl;
   public String posSide;
-  public String px;
+  public BigDecimal px;
   public String rebate;
   public String rebateCcy;
   public String reduceOnly;
@@ -39,7 +40,7 @@ public class _Order {
   public String slTriggerPx;
   public String slTriggerPxType;
   public String state;
-  public String sz;
+  public BigDecimal sz;
   public String tag;
   public String tdMode;
   public String tgtCcy;
@@ -48,5 +49,5 @@ public class _Order {
   public String tpTriggerPx;
   public String tpTriggerPxType;
   public String tradeId;
-  public String uTime;
+  public long uTime;
 }

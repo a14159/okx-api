@@ -23,7 +23,7 @@ public final class GetInstruments extends MarketRestRequest<GetInstruments.Respo
 
   public static final RateLimitRule RATE_LIMIT_RULE =
       RateLimitRule.newBuilder()
-          .setName("ip_rest_get_public_instruments")
+          .setName("ip_rest_get_instruments")
           .setType(IP)
           .setMaxPermits(20)
           .setResetPeriod(Duration.ofSeconds(2))

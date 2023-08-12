@@ -16,9 +16,10 @@ import java.time.Duration;
 import static io.contek.invoker.commons.actor.ratelimit.LimitType.IP;
 import static io.contek.invoker.okx.api.common.constants.InstrumentTypeKeys.*;
 import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNullElse;
 
 @NotThreadSafe
-public final class GetPublicInstruments extends MarketRestRequest<GetPublicInstruments.Response> {
+public final class GetInstruments extends MarketRestRequest<GetInstruments.Response> {
 
   public static final RateLimitRule RATE_LIMIT_RULE =
       RateLimitRule.newBuilder()
@@ -32,24 +33,30 @@ public final class GetPublicInstruments extends MarketRestRequest<GetPublicInstr
       ImmutableList.of(RATE_LIMIT_RULE.forPermits(1));
 
   private String instType;
+  private String instFamily;
   private String uly;
   private String instId;
 
-  GetPublicInstruments(IActor actor, RestContext context) {
+  GetInstruments(IActor actor, RestContext context) {
     super(actor, context);
   }
 
-  public GetPublicInstruments setInstType(String instType) {
+  public GetInstruments setInstType(String instType) {
     this.instType = instType;
     return this;
   }
 
-  public GetPublicInstruments setUly(@Nullable String uly) {
+  public GetInstruments setInstFamily(String instFamily) {
+    this.instFamily = instFamily;
+    return this;
+  }
+
+  public GetInstruments setUly(@Nullable String uly) {
     this.uly = uly;
     return this;
   }
 
-  public GetPublicInstruments setInstId(@Nullable String instId) {
+  public GetInstruments setInstId(@Nullable String instId) {
     this.instId = instId;
     return this;
   }
@@ -68,12 +75,13 @@ public final class GetPublicInstruments extends MarketRestRequest<GetPublicInstr
 
     switch (instType) {
       case _OPTION:
-        requireNonNull(uly);
+        requireNonNullElse(uly, instFamily);
       case _FUTURES:
       case _SWAP:
-        if (uly != null) {
+        if (uly != null)
           builder.add("uly", uly);
-        }
+        if (instFamily != null)
+            builder.add("instFamily", instFamily);
         break;
       default:
     }

@@ -44,8 +44,8 @@ public final class MarketRestApi {
     return new GetMarketTrades(actor, context);
   }
 
-  public GetPublicInstruments getPublicInstruments() {
-    return new GetPublicInstruments(actor, context);
+  public GetInstruments getPublicInstruments() {
+    return new GetInstruments(actor, context);
   }
 
   public GetFundingRate getFundingRate() {

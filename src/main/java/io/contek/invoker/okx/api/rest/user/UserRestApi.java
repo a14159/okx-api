@@ -83,4 +83,9 @@ public final class UserRestApi {
   public PostTradeOrder postTradeOrder() {
     return new PostTradeOrder(actor, context);
   }
+
+  public PostEasyConvert postEasyConvert() {
+    return new PostEasyConvert(actor, context);
+  }
+
 }

@@ -1,13 +1,14 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Position {
 
   public String adl;
-  public String availPos;
-  public String avgPx;
+  public BigDecimal availPos;
+  public BigDecimal avgPx;
   public String cTime;
   public String ccy;
   public String deltaBS;
@@ -24,15 +25,15 @@ public class _Position {
   public String liab;
   public String liabCcy;
   public String liqPx;
-  public String markPx;
+  public BigDecimal markPx;
   public String margin;
   public String mgnMode;
   public String mgnRatio;
-  public String mmr;
+  public BigDecimal mmr;
   public String notionalUsd;
   public String optVal;
   public String pTime;
-  public String pos;
+  public BigDecimal pos;
   public String posCcy;
   public String posId;
   public String posSide;

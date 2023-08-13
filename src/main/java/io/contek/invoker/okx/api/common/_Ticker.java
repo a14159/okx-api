@@ -1,18 +1,19 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Ticker {
 
   public String instType;
   public String instId;
-  public String last;
+  public BigDecimal last;
   public String lastSz;
-  public String askPx;
-  public String askSz;
-  public String bidPx;
-  public String bidSz;
+  public BigDecimal askPx;
+  public BigDecimal askSz;
+  public BigDecimal bidPx;
+  public BigDecimal bidSz;
   public String open24h;
   public String high24h;
   public String low24h;

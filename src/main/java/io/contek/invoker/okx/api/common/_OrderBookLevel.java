@@ -17,7 +17,7 @@ public class _OrderBookLevel extends ArrayList<String> {
         return price;
     }
 
-    public BigDecimal getSize() {
+    public BigDecimal getQty() {
         if (qty != null)
             return qty;
         qty = new BigDecimal(get(1));

@@ -17,8 +17,8 @@ public class _Ticker {
   public String open24h;
   public String high24h;
   public String low24h;
-  public String volCcy24h;
-  public String vol24h;
+  public BigDecimal volCcy24h;
+  public BigDecimal vol24h;
   public String sodUtc0;
   public String sodUtc8;
   public String ts;

@@ -63,6 +63,8 @@ public final class GetMarketBooks extends MarketRestRequest<GetMarketBooks.Respo
 
     if (sz != null) {
       builder.add("sz", sz);
+    } else {
+      builder.add("sz", 5);
     }
 
     return builder.build();

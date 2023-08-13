@@ -6,7 +6,7 @@ import java.util.List;
 @NotThreadSafe
 public abstract class ResponseWrapper<T> {
 
-  public String code;
+  public int code;
   public String msg;
   public List<T> data;
 }

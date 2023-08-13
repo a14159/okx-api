@@ -71,7 +71,7 @@ public abstract class RestRequest<R extends ResponseWrapper<?>> extends BaseRest
 
   @Override
   protected final void checkResult(R result, RestResponse response) throws AnyHttpException {
-    if (result.code.equals("0")) {
+    if (result.code == 0) {
       return;
     }
 

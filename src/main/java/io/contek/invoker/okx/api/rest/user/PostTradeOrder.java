@@ -12,6 +12,7 @@ import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
+import java.math.BigDecimal;
 import java.time.Duration;
 
 import static io.contek.invoker.commons.actor.ratelimit.LimitType.API_KEY;
@@ -40,8 +41,8 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
   private String side;
   private String posSide;
   private String ordType;
-  private String sz;
-  private String px;
+  private BigDecimal sz;
+  private BigDecimal px;
   private Boolean reduceOnly;
   private String tgtCcy;
 
@@ -89,12 +90,12 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
     return this;
   }
 
-  public PostTradeOrder setSz(String sz) {
+  public PostTradeOrder setSz(BigDecimal sz) {
     this.sz = sz;
     return this;
   }
 
-  public PostTradeOrder setPx(@Nullable String px) {
+  public PostTradeOrder setPx(@Nullable BigDecimal px) {
     this.px = px;
     return this;
   }
@@ -136,7 +137,7 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
     builder.add("ordType", ordType);
 
     requireNonNull(sz);
-    builder.add("sz", sz);
+    builder.add("sz", sz.toPlainString());
 
     if (ccy != null) {
       builder.add("ccy", ccy);
@@ -155,7 +156,7 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
     }
 
     if (px != null) {
-      builder.add("px", px);
+      builder.add("px", px.toPlainString());
     }
 
     if (reduceOnly != null) {

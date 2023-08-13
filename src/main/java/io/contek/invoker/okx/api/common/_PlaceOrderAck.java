@@ -8,6 +8,6 @@ public class _PlaceOrderAck {
   public String clOrdId;
   public String ordId;
   public String tag;
-  public String sCode;
+  public long sCode;
   public String sMsg;
 }

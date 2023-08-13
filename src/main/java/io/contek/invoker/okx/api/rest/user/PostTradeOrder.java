@@ -45,6 +45,10 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
   private BigDecimal px;
   private Boolean reduceOnly;
   private String tgtCcy;
+  private BigDecimal tpTriggerPx;
+  private BigDecimal tpOrdPx;
+  private BigDecimal slTriggerPx;
+  private BigDecimal slOrdPx;
 
   PostTradeOrder(IActor actor, RestContext context) {
     super(actor, context);
@@ -97,6 +101,26 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
 
   public PostTradeOrder setPx(@Nullable BigDecimal px) {
     this.px = px;
+    return this;
+  }
+
+  public PostTradeOrder setTpTriggerPx(@Nullable BigDecimal tpTriggerPx) {
+    this.tpTriggerPx = tpTriggerPx;
+    return this;
+  }
+
+  public PostTradeOrder setTpOrdPx(@Nullable BigDecimal tpOrdPx) {
+    this.tpOrdPx = tpOrdPx;
+    return this;
+  }
+
+  public PostTradeOrder setSlTriggerPx(@Nullable BigDecimal slTriggerPx) {
+    this.slTriggerPx = slTriggerPx;
+    return this;
+  }
+
+  public PostTradeOrder setSlOrdPx(@Nullable BigDecimal slOrdPx) {
+    this.slOrdPx = slOrdPx;
     return this;
   }
 
@@ -157,6 +181,22 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
 
     if (px != null) {
       builder.add("px", px.toPlainString());
+    }
+
+    if (tpTriggerPx != null) {
+      builder.add("tpTriggerPx", tpTriggerPx.toPlainString());
+    }
+
+    if (tpOrdPx != null) {
+      builder.add("tpOrdPx", tpOrdPx.toPlainString());
+    }
+
+    if (slTriggerPx != null) {
+      builder.add("slTriggerPx", slTriggerPx.toPlainString());
+    }
+
+    if (slOrdPx != null) {
+      builder.add("slOrdPx", slOrdPx.toPlainString());
     }
 
     if (reduceOnly != null) {

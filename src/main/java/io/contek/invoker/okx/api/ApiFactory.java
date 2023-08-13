@@ -96,6 +96,7 @@ public final class ApiFactory {
         GetMarketIndexCandles.RATE_LIMIT_RULE,
         GetMarketMarkPriceCandles.RATE_LIMIT_RULE,
         GetMarketTickers.RATE_LIMIT_RULE,
+        GetMarketTicker.RATE_LIMIT_RULE,
         GetMarketTrades.RATE_LIMIT_RULE,
         GetInstruments.RATE_LIMIT_RULE,
         GetInterestRate.RATE_LIMIT_RULE,

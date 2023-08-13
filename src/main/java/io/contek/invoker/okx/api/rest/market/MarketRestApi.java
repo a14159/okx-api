@@ -40,6 +40,10 @@ public final class MarketRestApi {
     return new GetMarketTickers(actor, context);
   }
 
+  public GetMarketTicker getMarketTicker() {
+    return new GetMarketTicker(actor, context);
+  }
+
   public GetMarketTrades getMarketTrades() {
     return new GetMarketTrades(actor, context);
   }

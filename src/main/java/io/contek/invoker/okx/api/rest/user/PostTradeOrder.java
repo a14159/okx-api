@@ -49,6 +49,7 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
   private BigDecimal tpOrdPx;
   private BigDecimal slTriggerPx;
   private BigDecimal slOrdPx;
+  private String quickMgnType;
 
   PostTradeOrder(IActor actor, RestContext context) {
     super(actor, context);
@@ -134,6 +135,11 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
     return this;
   }
 
+  public PostTradeOrder setQuickMgnType(@Nullable String quickMgnType) {
+    this.quickMgnType = quickMgnType;
+    return this;
+  }
+
   @Override
   protected RestMethod getMethod() {
     return POST;
@@ -205,6 +211,10 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
 
     if (tgtCcy != null) {
       builder.add("tgtCcy", tgtCcy);
+    }
+
+    if (quickMgnType != null) {
+      builder.add("quickMgnType", quickMgnType);
     }
 
     return builder.build();

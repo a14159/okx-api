@@ -34,7 +34,7 @@ public final class PostAccountSetLeverage extends UserRestRequest<PostAccountSet
 
   private String instId;
   private String ccy;
-  private String lever;
+  private int lever = 1;
   private String mgnMode;
   private String posSide;
 
@@ -52,7 +52,7 @@ public final class PostAccountSetLeverage extends UserRestRequest<PostAccountSet
     return this;
   }
 
-  public PostAccountSetLeverage setLever(String lever) {
+  public PostAccountSetLeverage setLever(int lever) {
     this.lever = lever;
     return this;
   }
@@ -88,8 +88,7 @@ public final class PostAccountSetLeverage extends UserRestRequest<PostAccountSet
       builder.add("ccy", ccy);
     }
 
-    requireNonNull(lever);
-    builder.add("lever", lever);
+    builder.add("lever", Integer.toString(lever));
 
     requireNonNull(mgnMode);
     builder.add("mgnMode", mgnMode);

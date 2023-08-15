@@ -40,8 +40,8 @@ public final class UserRestApi {
     return new GetAssetBalances(actor, context);
   }
 
-  public GetInterestRate getInterestRate() {
-    return new GetInterestRate(actor, context);
+  public GetAccountInterestRate getInterestRate() {
+    return new GetAccountInterestRate(actor, context);
   }
 
   public GetTradeFills getTradeFills() {

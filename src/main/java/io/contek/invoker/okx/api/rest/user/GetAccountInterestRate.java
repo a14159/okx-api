@@ -17,7 +17,7 @@ import static io.contek.invoker.commons.actor.ratelimit.LimitType.API_KEY;
 import static io.contek.invoker.commons.rest.RestMethod.GET;
 
 @NotThreadSafe
-public final class GetInterestRate extends UserRestRequest<GetInterestRate.Response> {
+public final class GetAccountInterestRate extends UserRestRequest<GetAccountInterestRate.Response> {
 
   public static final RateLimitRule RATE_LIMIT_RULE =
       RateLimitRule.newBuilder()
@@ -32,11 +32,11 @@ public final class GetInterestRate extends UserRestRequest<GetInterestRate.Respo
 
   private String ccy;
 
-  GetInterestRate(IActor actor, RestContext context) {
+  GetAccountInterestRate(IActor actor, RestContext context) {
     super(actor, context);
   }
 
-  public GetInterestRate setCcy(String ccy) {
+  public GetAccountInterestRate setCcy(String ccy) {
     this.ccy = ccy;
     return this;
   }

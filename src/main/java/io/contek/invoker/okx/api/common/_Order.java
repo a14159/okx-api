@@ -17,12 +17,12 @@ public class _Order {
   public String execType;
   public String fee;
   public String feeCcy;
-  public String fillFee;
+  public BigDecimal fillFee;
   public String fillFeeCcy;
   public String fillNotionalUsd;
-  public String fillPx;
-  public String fillSz;
-  public String fillTime;
+  public BigDecimal fillPx;
+  public BigDecimal fillSz;
+  public long fillTime;
   public String instId;
   public String instType;
   public String lever;
@@ -48,6 +48,6 @@ public class _Order {
   public String tpOrdPx;
   public String tpTriggerPx;
   public String tpTriggerPxType;
-  public String tradeId;
+  public long tradeId;
   public long uTime;
 }

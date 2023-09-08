@@ -48,6 +48,10 @@ public final class MarketRestApi {
     return new GetMarketTrades(actor, context);
   }
 
+  public GetMarketTradesHistory getMarketTradesHistory() {
+    return new GetMarketTradesHistory(actor, context);
+  }
+
   public GetInstruments getInstruments() {
     return new GetInstruments(actor, context);
   }

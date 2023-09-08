@@ -30,13 +30,33 @@ public final class GetMarketTradesHistory extends MarketRestRequest<GetMarketTra
       ImmutableList.of(RATE_LIMIT_RULE.forPermits(1));
 
   private String instId;
-  private String type;
+  private Integer type = 2;
   private long after;
   private long before;
   private Integer limit; // max and default 100
 
   GetMarketTradesHistory(IActor actor, RestContext context) {
     super(actor, context);
+  }
+
+  public GetMarketTradesHistory setInstId(String instId) {
+    this.instId = instId;
+    return this;
+  }
+
+  public GetMarketTradesHistory setType(Integer type) {
+    this.type = type;
+    return this;
+  }
+
+  public GetMarketTradesHistory setBefore(long before) {
+    this.before = before;
+    return this;
+  }
+
+  public GetMarketTradesHistory setAfter(long after) {
+    this.after = after;
+    return this;
   }
 
   @Override
@@ -54,6 +74,12 @@ public final class GetMarketTradesHistory extends MarketRestRequest<GetMarketTra
     if (limit != null) {
       builder.add("limit", limit);
     }
+
+    if (before != 0)
+      builder.add("before", before);
+
+    if (after != 0)
+      builder.add("after", after);
 
     return builder.build();
   }

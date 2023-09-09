@@ -21,8 +21,8 @@ public class _EquityBalance {
   public BigDecimal isoUpl; // Isolated unrealized profit and loss of the currency
   public BigDecimal liab; // Liabilities of the currency
   public BigDecimal maxLoan; // Max loan of the currency
-  public BigDecimal mgnRatio; // Margin ratio of the currency
-  public BigDecimal notionalLever; // Leverage of the currency Applicable to Single-currency margin
+  public String mgnRatio; // Margin ratio of the currency
+  public String notionalLever; // Leverage of the currency Applicable to Single-currency margin
   public BigDecimal ordFrozen; // Margin frozen for open orders
   public BigDecimal twap; // Risk indicator of auto liability repayment Divided into 5 levels, from 1 to 5, the larger the number, the more likely the auto repayment will be triggered.
   public long uTime;

@@ -1,5 +1,7 @@
 package io.contek.invoker.okx.api.common;
 
+import io.contek.invoker.okx.api.Util;
+
 import javax.annotation.concurrent.NotThreadSafe;
 import java.math.BigDecimal;
 
@@ -27,4 +29,12 @@ public class _Instrument {
   public String ctType;
   public String alias;
   public String state;
+
+  public BigDecimal getCtVal() {
+    return Util.parseString(ctVal, BigDecimal.ONE);
+  }
+
+  public BigDecimal getCtMult() {
+    return Util.parseString(ctMult, BigDecimal.ONE);
+  }
 }

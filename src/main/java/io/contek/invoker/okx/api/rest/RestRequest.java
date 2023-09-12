@@ -75,7 +75,8 @@ public abstract class RestRequest<R extends ResponseWrapper<?>> extends BaseRest
       return;
     }
 
-    throw new ParsedHttpException(response.getCode(), result, result.msg);
+//    throw new ParsedHttpException(response.getCode(), result, result.msg); // original
+    throw new ParsedHttpException(response.getCode(), result, response.getStringValue());
   }
 
   private ImmutableMap<String, String> generateHeaders(

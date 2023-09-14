@@ -20,9 +20,9 @@ public class _Order {
   public BigDecimal fillFee;
   public String fillFeeCcy;
   public String fillNotionalUsd;
-  public BigDecimal fillPx;
+  public String fillPx;
   public BigDecimal fillSz;
-  public long fillTime;
+  public String fillTime;
   public String instId;
   public String instType;
   public String lever;
@@ -30,7 +30,7 @@ public class _Order {
   public String ordType;
   public String pnl;
   public String posSide;
-  public BigDecimal px;
+  public String px;
   public String rebate;
   public String rebateCcy;
   public String reduceOnly;
@@ -48,6 +48,30 @@ public class _Order {
   public String tpOrdPx;
   public String tpTriggerPx;
   public String tpTriggerPxType;
-  public long tradeId;
+  public String tradeId;
   public long uTime;
+
+  public BigDecimal getPx() {
+    if (px == null || px.isEmpty())
+      return BigDecimal.ZERO;
+    return new BigDecimal(px);
+  }
+
+  public BigDecimal getFillPx() {
+    if (fillPx == null || fillPx.isEmpty())
+      return BigDecimal.ZERO;
+    return new BigDecimal(fillPx);
+  }
+
+  public long getFillTime() {
+    if (fillTime == null || fillTime.isEmpty())
+      return 0;
+    return Long.parseLong(fillTime);
+  }
+
+  public long getTradeId() {
+    if (tradeId == null || tradeId.isEmpty())
+      return 0;
+    return Long.parseLong(tradeId);
+  }
 }

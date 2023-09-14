@@ -16,11 +16,14 @@ public final class UserWebSocketApi extends WebSocketApi {
 
   private final WebSocketContext context;
 
+  private final String name;
+
   private final Map<OrdersChannel.Id, OrdersChannel> ordersChannels = new HashMap<>();
   private final Map<PositionsChannel.Id, PositionsChannel> positionsChannels = new HashMap<>();
 
   public UserWebSocketApi(String name, IActor actor, WebSocketContext context) {
     super(name, actor);
+    this.name = name;
     this.context = context;
   }
 
@@ -50,6 +53,9 @@ public final class UserWebSocketApi extends WebSocketApi {
 
   @Override
   protected WebSocketCall createCall(ICredential credential) {
-    return WebSocketCall.fromUrl(context.getBaseUrl() + "/ws/v5/private");
+    if (!"TEST".equals(name))
+        return WebSocketCall.fromUrl(context.getBaseUrl() + "/ws/v5/private");
+    else
+        return WebSocketCall.fromUrl(context.getBaseUrl() + "/ws/v5/private?brokerId=9999");
   }
 }

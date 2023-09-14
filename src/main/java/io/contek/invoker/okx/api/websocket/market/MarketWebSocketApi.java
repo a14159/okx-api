@@ -15,6 +15,8 @@ public final class MarketWebSocketApi extends WebSocketApi {
 
   private final WebSocketContext context;
 
+  private final String name;
+
   private final Map<OrderBookChannel.Id, OrderBookChannel> orderBookChannels = new HashMap<>();
   private final Map<TickersChannel.Id, TickersChannel> tickerChannels = new HashMap<>();
   private final Map<TradesChannel.Id, TradesChannel> tradesChannels = new HashMap<>();
@@ -23,7 +25,8 @@ public final class MarketWebSocketApi extends WebSocketApi {
       new HashMap<>();
 
   public MarketWebSocketApi(String name, IActor actor, WebSocketContext context) {
-    super(name, actor);
+    super(name, actor); // "name" here" is used by the live keeper thread to log/report events
+    this.name = name;
     this.context = context;
   }
 
@@ -89,6 +92,9 @@ public final class MarketWebSocketApi extends WebSocketApi {
 
   @Override
   protected WebSocketCall createCall(ICredential credential) {
-    return WebSocketCall.fromUrl(context.getBaseUrl() + "/ws/v5/public");
+    if (!"TEST".equals(name))
+        return WebSocketCall.fromUrl(context.getBaseUrl() + "/ws/v5/public");
+    else
+        return WebSocketCall.fromUrl(context.getBaseUrl() + "/ws/v5/public?brokerId=9999");
   }
 }

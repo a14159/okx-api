@@ -43,6 +43,13 @@ public final class ApiFactory {
               WebSocketContext.forBaseUrl("wss://wsaws.okx.com:8443", Duration.ofSeconds(15)))
           .build();
 
+  public static final ApiContext TEST_CONTEXT =
+          ApiContext.newBuilder()
+                  .setRestContext(RestContext.forBaseUrl("https://www.okx.com"))
+                  .setWebSocketContext(
+                          WebSocketContext.forBaseUrl("wss://wspap.okx.com:8443", Duration.ofSeconds(15)))
+                  .build();
+
   private final ApiContext context;
   private final IActorFactory actorFactory;
 
@@ -57,6 +64,10 @@ public final class ApiFactory {
 
   public static ApiFactory getAwsNet() {
     return fromContext(MAIN_NET_CONTEXT);
+  }
+
+  public static ApiFactory getTestNet() {
+    return fromContext(TEST_CONTEXT);
   }
 
   public static ApiFactory fromContext(ApiContext context) {

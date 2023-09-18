@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class _Position {
 
   public String adl;
-  public BigDecimal availPos;
+  public String availPos;
   public BigDecimal avgPx;
   public String cTime;
   public String ccy;

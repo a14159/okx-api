@@ -74,4 +74,35 @@ public class _Order {
       return 0;
     return Long.parseLong(tradeId);
   }
+
+  @Override
+  public String toString() {
+    return "_Order{" +
+            "instType='" + instType + '\'' +
+            ", instId='" + instId + '\'' +
+            ", ordType='" + ordType + '\'' +
+            ", side='" + side + '\'' +
+            ", state='" + state + '\'' +
+            ", size=" + sz +
+            ", price='" + px + '\'' +
+            ", fillPx='" + fillPx + '\'' +
+            ", fillSz=" + fillSz +
+            ", accFillSz=" + accFillSz +
+            ", avgPx=" + avgPx +
+            ", category='" + category + '\'' +
+            ", ccy='" + ccy + '\'' +
+            ", clOrdId='" + clOrdId + '\'' +
+            ", code='" + code + '\'' +
+            ", execType='" + execType + '\'' +
+            ", fee='" + fee + '\'' +
+            ", feeCcy='" + feeCcy + '\'' +
+            ", lever='" + lever + '\'' +
+            ", ordId=" + ordId +
+            ", posSide='" + posSide + '\'' +
+            ", reduceOnly='" + reduceOnly + '\'' +
+            ", tdMode='" + tdMode + '\'' +
+            ", source='" + source + '\'' +
+            ", tradeId='" + tradeId + '\'' +
+            '}';
+  }
 }

@@ -89,7 +89,7 @@ public class _Order {
             ", fillSz=" + fillSz +
             ", accFillSz=" + accFillSz +
             ", avgPx=" + avgPx +
-            ", category='" + category + '\'' +
+            ", tgtCcy=" + tgtCcy +
             ", ccy='" + ccy + '\'' +
             ", clOrdId='" + clOrdId + '\'' +
             ", code='" + code + '\'' +
@@ -101,7 +101,6 @@ public class _Order {
             ", posSide='" + posSide + '\'' +
             ", reduceOnly='" + reduceOnly + '\'' +
             ", tdMode='" + tdMode + '\'' +
-            ", source='" + source + '\'' +
             ", tradeId='" + tradeId + '\'' +
             '}';
   }

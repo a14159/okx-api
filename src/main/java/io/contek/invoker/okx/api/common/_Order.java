@@ -52,27 +52,19 @@ public class _Order {
   public long uTime;
 
   public BigDecimal getPx() {
-    if (px == null || px.isEmpty())
-      return BigDecimal.ZERO;
-    return new BigDecimal(px);
+    return Util.parseString(px, BigDecimal.ZERO);
   }
 
   public BigDecimal getFillPx() {
-    if (fillPx == null || fillPx.isEmpty())
-      return BigDecimal.ZERO;
-    return new BigDecimal(fillPx);
+    return Util.parseString(fillPx, BigDecimal.ZERO);
   }
 
   public long getFillTime() {
-    if (fillTime == null || fillTime.isEmpty())
-      return 0;
-    return Long.parseLong(fillTime);
+    return Util.parseString(fillTime, 0);
   }
 
   public long getTradeId() {
-    if (tradeId == null || tradeId.isEmpty())
-      return 0;
-    return Long.parseLong(tradeId);
+    return Util.parseString(tradeId, 0);
   }
 
   @Override

@@ -1,7 +1,5 @@
 package io.contek.invoker.okx.api.common;
 
-import io.contek.invoker.okx.api.Util;
-
 import javax.annotation.concurrent.NotThreadSafe;
 import java.math.BigDecimal;
 

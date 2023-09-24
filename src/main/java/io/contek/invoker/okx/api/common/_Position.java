@@ -8,7 +8,7 @@ public class _Position {
 
   public String adl;
   public String availPos;
-  public BigDecimal avgPx;
+  public String avgPx;
   public String cTime;
   public String ccy;
   public String deltaBS;
@@ -25,15 +25,15 @@ public class _Position {
   public String liab;
   public String liabCcy;
   public String liqPx;
-  public BigDecimal markPx;
+  public String markPx;
   public String margin;
   public String mgnMode;
   public String mgnRatio;
-  public BigDecimal mmr;
+  public String mmr;
   public String notionalUsd;
   public String optVal;
   public String pTime;
-  public BigDecimal pos;
+  public String pos;
   public String posCcy;
   public String posId;
   public String posSide;
@@ -45,4 +45,20 @@ public class _Position {
   public String uplRatio;
   public String vegaBS;
   public String vegaPA;
+
+  public BigDecimal getAvgPx() {
+    return Util.parseString(avgPx, BigDecimal.ZERO);
+  }
+
+  public BigDecimal getMarkPx() {
+    return Util.parseString(markPx, BigDecimal.ZERO);
+  }
+
+  public BigDecimal getMmr() {
+    return Util.parseString(mmr, BigDecimal.ZERO);
+  }
+
+  public BigDecimal getPos() {
+    return Util.parseString(pos, BigDecimal.ZERO);
+  }
 }

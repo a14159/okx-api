@@ -63,7 +63,7 @@ public final class ApiFactory {
   }
 
   public static ApiFactory getAwsNet() {
-    return fromContext(MAIN_NET_CONTEXT);
+    return fromContext(AWS_NET_CONTEXT);
   }
 
   public static ApiFactory getTestNet() {
@@ -141,6 +141,12 @@ public final class ApiFactory {
     public MarketRestApi market() {
       RestContext restContext = context.getRestContext();
       IActor actor = actorFactory.create(null, restContext);
+      return new MarketRestApi(actor, restContext);
+    }
+
+    public MarketRestApi market(ApiKey apiKey) { // used for test env
+      RestContext restContext = context.getRestContext();
+      IActor actor = actorFactory.create(apiKey, restContext);
       return new MarketRestApi(actor, restContext);
     }
 

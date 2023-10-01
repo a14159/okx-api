@@ -10,9 +10,9 @@ public class _Ticker {
   public String instId;
   public BigDecimal last;
   public String lastSz;
-  public BigDecimal askPx;
+  public String askPx;
   public BigDecimal askSz;
-  public BigDecimal bidPx;
+  public String bidPx;
   public BigDecimal bidSz;
   public String open24h;
   public String high24h;
@@ -22,4 +22,12 @@ public class _Ticker {
   public String sodUtc0;
   public String sodUtc8;
   public String ts;
+
+  public BigDecimal getAskPx() {
+    return Util.parseString(askPx, BigDecimal.ZERO);
+  }
+
+  public BigDecimal getBidPx() {
+    return Util.parseString(bidPx, BigDecimal.ZERO)
+  }
 }

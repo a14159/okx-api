@@ -28,6 +28,6 @@ public class _Ticker {
   }
 
   public BigDecimal getBidPx() {
-    return Util.parseString(bidPx, BigDecimal.ZERO)
+    return Util.parseString(bidPx, BigDecimal.ZERO);
   }
 }

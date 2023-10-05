@@ -8,7 +8,7 @@ public class _Order {
 
   public BigDecimal accFillSz;
   public String amendResult;
-  public BigDecimal avgPx;
+  public String avgPx;
   public long cTime;
   public String category;
   public String ccy;
@@ -57,6 +57,10 @@ public class _Order {
 
   public BigDecimal getFillPx() {
     return Util.parseString(fillPx, BigDecimal.ZERO);
+  }
+
+  public BigDecimal getAvgPx() {
+    return Util.parseString(avgPx, BigDecimal.ZERO);
   }
 
   public long getFillTime() {

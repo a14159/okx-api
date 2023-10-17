@@ -32,6 +32,10 @@ public final class UserRestApi {
     return new GetAccountLeverageInfo(actor, context);
   }
 
+  public GetAccountMaxLoan getAccountMaxLoan() {
+    return new GetAccountMaxLoan(actor, context);
+  }
+
   public GetAccountPositions getAccountPositions() {
     return new GetAccountPositions(actor, context);
   }

@@ -126,6 +126,7 @@ public final class ApiFactory {
         GetTradeOrderHistory.RATE_LIMIT_RULE,
         GetTradeOrderHistoryArchive.RATE_LIMIT_RULE,
         GetTradeOrdersPending.RATE_LIMIT_RULE,
+        GetSystemTime.RATE_LIMIT_RULE,
         PostAccountSetLeverage.RATE_LIMIT_RULE,
         PostAccountSetPositionMode.RATE_LIMIT_RULE,
         PostTradeCancelOrder.RATE_LIMIT_RULE,

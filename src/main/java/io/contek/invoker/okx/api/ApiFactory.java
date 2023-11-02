@@ -119,6 +119,7 @@ public final class ApiFactory {
         GetAccountLeverageInfo.RATE_LIMIT_RULE,
         GetAccountMaxLoan.RATE_LIMIT_RULE,
         GetAccountPositions.RATE_LIMIT_RULE,
+        GetAccountFeeRate.RATE_LIMIT_RULE,
         GetAssetBalances.RATE_LIMIT_RULE,
         GetTradeFills.RATE_LIMIT_RULE,
         GetTradeFillsHistory.RATE_LIMIT_RULE,

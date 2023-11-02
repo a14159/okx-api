@@ -32,6 +32,10 @@ public final class UserRestApi {
     return new GetAccountLeverageInfo(actor, context);
   }
 
+  public GetAccountFeeRate getAccountFeeRate() {
+    return new GetAccountFeeRate(actor, context);
+  }
+
   public GetAccountMaxLoan getAccountMaxLoan() {
     return new GetAccountMaxLoan(actor, context);
   }

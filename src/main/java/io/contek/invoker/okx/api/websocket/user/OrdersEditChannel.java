@@ -91,7 +91,9 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     @Override
     public String toString() {
       _WSOrderEditAck orderEditAck = data.get(0);
-      return op + " " + orderEditAck.clOrdId + " error: " + orderEditAck.sCode;
+      if (orderEditAck.sCode == null || orderEditAck.sCode.isEmpty() || "0".equals(orderEditAck.sCode))
+        return id + " " + op + " " + orderEditAck.clOrdId;
+      else return id + " " + op + " " + orderEditAck.clOrdId + " error: " + orderEditAck.sCode + " " + orderEditAck.sMsg;
     }
   }
 }

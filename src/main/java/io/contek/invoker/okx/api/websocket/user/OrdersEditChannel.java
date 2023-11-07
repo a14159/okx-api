@@ -81,7 +81,7 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     WebSocketOrderRequest<WebSocketCancelOrderArg> request = new WebSocketOrderRequest<>();
     request.id = Integer.toString(id.incrementAndGet());
     request.args = List.of(postArg);
-    request.op = WebSocketOrderOpKeys._order;
+    request.op = WebSocketOrderOpKeys._cancel;
     if (session != null)
       session.send(request);
   }

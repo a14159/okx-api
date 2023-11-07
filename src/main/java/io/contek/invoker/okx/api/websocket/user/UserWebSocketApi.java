@@ -19,6 +19,7 @@ public final class UserWebSocketApi extends WebSocketApi {
   private final String name;
 
   private final Map<OrdersChannel.Id, OrdersChannel> ordersChannels = new HashMap<>();
+  private final Map<OrdersEditChannel.Id, OrdersEditChannel> ordersEditChannels = new HashMap<>();
   private final Map<PositionsChannel.Id, PositionsChannel> positionsChannels = new HashMap<>();
 
   public UserWebSocketApi(String name, IActor actor, WebSocketContext context) {
@@ -33,6 +34,18 @@ public final class UserWebSocketApi extends WebSocketApi {
           OrdersChannel.Id.of(type, instId),
           k -> {
             OrdersChannel result = new OrdersChannel(k);
+            attach(result);
+            return result;
+          });
+    }
+  }
+
+  public OrdersEditChannel getOrdersEditChannel(String type, @Nullable String instId) {
+    synchronized (ordersEditChannels) {
+      return ordersEditChannels.computeIfAbsent(
+          OrdersEditChannel.Id.of(type, instId),
+          k -> {
+            OrdersEditChannel result = new OrdersEditChannel(k);
             attach(result);
             return result;
           });

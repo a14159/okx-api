@@ -27,6 +27,8 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
   private final AtomicReference<WebSocketSubscriptionRequest> pendingRequestHolder =
       new AtomicReference<>(null);
 
+  public WebSocketSession session;
+
   protected WebSocketChannel(WebSocketChannelId<Message> id) {
     super(id);
   }
@@ -38,6 +40,7 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
 
   @Override
   protected final SubscriptionState subscribe(WebSocketSession session) {
+    this.session = session;
     synchronized (pendingRequestHolder) {
       if (pendingRequestHolder.get() != null) {
         throw new IllegalStateException();

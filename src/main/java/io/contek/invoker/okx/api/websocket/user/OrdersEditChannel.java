@@ -41,16 +41,15 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     }
   }
 
-
-  public void placeLimitOrder(String clientId, String market, String side, BigDecimal price, BigDecimal qty, boolean postOnly, boolean reduceOnly) {
+  public void placeLimitOrder(String clientId, String market, String side, BigDecimal price, BigDecimal qty) {
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
     postArg.ordType = OrderTypeKeys._limit;
+    postArg.tdMode = "cross";
     postArg.side = side;
     postArg.px = price.toPlainString();
     postArg.sz = qty.toPlainString();
-    postArg.reduceOnly = reduceOnly;
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
     request.id = Integer.toString(id.incrementAndGet());
     request.args = List.of(postArg);
@@ -64,6 +63,7 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.clOrdId = clientId;
     postArg.instId = market;
     postArg.ordType = OrderTypeKeys._market;
+    postArg.tdMode = "cross";
     postArg.side = side;
     postArg.sz = qty.toPlainString();
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
@@ -87,5 +87,11 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
   }
 
   @NotThreadSafe
-  public static final class Message extends WebSocketOrderResponse<_WSOrderEditAck> {}
+  public static final class Message extends WebSocketOrderResponse<_WSOrderEditAck> {
+    @Override
+    public String toString() {
+      _WSOrderEditAck orderEditAck = data.get(0);
+      return op + " " + orderEditAck.clOrdId + " error: " + orderEditAck.sCode;
+    }
+  }
 }

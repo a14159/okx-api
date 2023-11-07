@@ -7,6 +7,8 @@ public final class WebSocketInboundKeys {
 
   public static final String _event = "event";
 
+  public static final String _id = "id";
+
   public static final String _arg = "arg";
 
   public static final String _data = "data";

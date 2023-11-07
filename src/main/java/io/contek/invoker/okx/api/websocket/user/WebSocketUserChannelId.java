@@ -38,6 +38,8 @@ public abstract class WebSocketUserChannelId<Message extends WebSocketChannelPus
   @Override
   public final boolean accepts(Message message) {
     WebSocketChannelArg details = message.arg;
-    return Objects.equals(getChannel(), details.channel) && Objects.equals(instId, details.instId);
+    if (details != null)
+      return Objects.equals(getChannel(), details.channel) && Objects.equals(instId, details.instId);
+    else return true;
   }
 }

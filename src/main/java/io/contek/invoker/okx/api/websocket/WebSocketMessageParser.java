@@ -8,6 +8,7 @@ import io.contek.invoker.commons.websocket.WebSocketTextMessageParser;
 import io.contek.invoker.okx.api.websocket.common.*;
 import io.contek.invoker.okx.api.websocket.market.*;
 import io.contek.invoker.okx.api.websocket.user.OrdersChannel;
+import io.contek.invoker.okx.api.websocket.user.OrdersEditChannel;
 import io.contek.invoker.okx.api.websocket.user.PositionsChannel;
 
 import javax.annotation.concurrent.Immutable;
@@ -70,24 +71,29 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
   }
 
   private WebSocketChannelPushData<?> toPushData(JsonObject obj) {
-    if (!obj.has(_arg)) {
-      throw new IllegalArgumentException(obj.toString());
+    if (obj.has(_arg)) {
+      JsonObject arg = obj.getAsJsonObject(_arg);
+      String channel = arg.get(_channel).getAsString();
+
+      return switch (channel) {
+        case _books, _books5, _books50_l2_tbt, _books_l2_tbt -> gson.fromJson(
+                obj, OrderBookChannel.Message.class);
+        case _trades -> gson.fromJson(obj, TradesChannel.Message.class);
+        case _tickers -> gson.fromJson(obj, TickersChannel.Message.class);
+        case _orders -> gson.fromJson(obj, OrdersChannel.Message.class);
+        case _positions -> gson.fromJson(obj, PositionsChannel.Message.class);
+        case _mark_price -> gson.fromJson(obj, MarkPriceChannel.Message.class);
+        case _index_tickers -> gson.fromJson(obj, IndexTickersChannel.Message.class);
+        default -> throw new IllegalArgumentException(obj.toString());
+      };
     }
 
-    JsonObject arg = obj.getAsJsonObject(_arg);
-    String channel = arg.get(_channel).getAsString();
+    if (obj.has(_id)) {
+      // channel is _orders
+      return gson.fromJson(obj, OrdersEditChannel.Message.class);
+    }
 
-    return switch (channel) {
-      case _books, _books5, _books50_l2_tbt, _books_l2_tbt -> gson.fromJson(
-          obj, OrderBookChannel.Message.class);
-      case _trades -> gson.fromJson(obj, TradesChannel.Message.class);
-      case _tickers -> gson.fromJson(obj, TickersChannel.Message.class);
-      case _orders -> gson.fromJson(obj, OrdersChannel.Message.class);
-      case _positions -> gson.fromJson(obj, PositionsChannel.Message.class);
-      case _mark_price -> gson.fromJson(obj, MarkPriceChannel.Message.class);
-      case _index_tickers -> gson.fromJson(obj, IndexTickersChannel.Message.class);
-      default -> throw new IllegalArgumentException(obj.toString());
-    };
+    return null;
   }
 
   private WebSocketMessageParser() {}

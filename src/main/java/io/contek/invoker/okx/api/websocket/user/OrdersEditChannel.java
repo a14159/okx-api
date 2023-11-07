@@ -41,7 +41,7 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     }
   }
 
-  public void placeLimitOrder(String clientId, String market, String side, BigDecimal price, BigDecimal qty) {
+  public int placeLimitOrder(String clientId, String market, String side, BigDecimal price, BigDecimal qty) {
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
@@ -51,14 +51,18 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.px = price.toPlainString();
     postArg.sz = qty.toPlainString();
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
-    request.id = Integer.toString(id.incrementAndGet());
+    int rez = id.incrementAndGet();
+    request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._order;
-    if (session != null)
+    if (session != null) {
       session.send(request);
+      return rez;
+    }
+    return -1;
   }
 
-  public void placeMarketOrder(String clientId, String market, String side, BigDecimal qty) {
+  public int placeMarketOrder(String clientId, String market, String side, BigDecimal qty) {
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
@@ -67,23 +71,31 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.side = side;
     postArg.sz = qty.toPlainString();
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
-    request.id = Integer.toString(id.incrementAndGet());
+    int rez = id.incrementAndGet();
+    request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._order;
-    if (session != null)
+    if (session != null) {
       session.send(request);
+      return rez;
+    }
+    return -1;
   }
 
-  public void cancelOrder(String market, String clientId) {
+  public int cancelOrder(String market, String clientId) {
     WebSocketCancelOrderArg postArg = new WebSocketCancelOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
     WebSocketOrderRequest<WebSocketCancelOrderArg> request = new WebSocketOrderRequest<>();
-    request.id = Integer.toString(id.incrementAndGet());
+    int rez = id.incrementAndGet();
+    request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._cancel;
-    if (session != null)
+    if (session != null) {
       session.send(request);
+      return rez;
+    }
+    return -1;
   }
 
   @NotThreadSafe

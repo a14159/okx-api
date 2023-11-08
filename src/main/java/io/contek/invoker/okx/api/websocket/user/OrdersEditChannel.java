@@ -41,12 +41,12 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     }
   }
 
-  public int placeLimitOrder(String clientId, String market, String side, BigDecimal price, BigDecimal qty) {
+  public int placeLimitOrder(String market, String tdMode, String clientId, String side, BigDecimal price, BigDecimal qty) {
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
     postArg.ordType = OrderTypeKeys._limit;
-    postArg.tdMode = "cross";
+    postArg.tdMode = tdMode;
     postArg.side = side;
     postArg.px = price.toPlainString();
     postArg.sz = qty.toPlainString();
@@ -62,12 +62,12 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     return -1;
   }
 
-  public int placeMarketOrder(String clientId, String market, String side, BigDecimal qty) {
+  public int placeMarketOrder(String market, String tdMode, String clientId, String side, BigDecimal qty) {
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
     postArg.ordType = OrderTypeKeys._market;
-    postArg.tdMode = "cross";
+    postArg.tdMode = tdMode;
     postArg.side = side;
     postArg.sz = qty.toPlainString();
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();

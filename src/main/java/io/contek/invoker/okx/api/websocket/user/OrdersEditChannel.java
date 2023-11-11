@@ -50,6 +50,8 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.side = side;
     postArg.px = price.toPlainString();
     postArg.sz = qty.toPlainString();
+    if (market.lastIndexOf("-SWAP") < 0)
+      postArg.tgtCcy = "base_ccy";
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
     int rez = id.incrementAndGet();
     request.id = Integer.toString(rez);
@@ -70,6 +72,8 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.tdMode = tdMode;
     postArg.side = side;
     postArg.sz = qty.toPlainString();
+    if (market.lastIndexOf("-SWAP") < 0)
+      postArg.tgtCcy = "base_ccy";
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
     int rez = id.incrementAndGet();
     request.id = Integer.toString(rez);

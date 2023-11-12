@@ -13,15 +13,20 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static io.contek.invoker.okx.api.common.constants.InstrumentTypeKeys._MARGIN;
+import static io.contek.invoker.okx.api.common.constants.InstrumentTypeKeys._SPOT;
 import static io.contek.invoker.okx.api.websocket.common.constants.WebSocketChannelKeys._orders;
 
 @ThreadSafe
 public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChannel.Message> {
 
-  private final AtomicInteger id = new AtomicInteger(0);
+  private final AtomicInteger messageId = new AtomicInteger(0);
+
+  private final String marketType;
 
   OrdersEditChannel(OrdersEditChannel.Id id) {
     super(id);
+    this.marketType = id.type;
   }
 
   @Override
@@ -32,8 +37,11 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
   @Immutable
   public static final class Id extends WebSocketUserChannelId<Message> {
 
+    private final String type;
+
     private Id(String type, @Nullable String instId) {
       super(_orders, type, instId);
+      this.type = type;
     }
 
     public static Id of(String type, @Nullable String instId) {
@@ -50,10 +58,10 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.side = side;
     postArg.px = price.toPlainString();
     postArg.sz = qty.toPlainString();
-    if (market.lastIndexOf("-SWAP") < 0)
+    if (_SPOT.equals(marketType) || _MARGIN.equals(marketType))
       postArg.tgtCcy = "base_ccy";
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
-    int rez = id.incrementAndGet();
+    int rez = messageId.incrementAndGet();
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._order;
@@ -72,10 +80,10 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.tdMode = tdMode;
     postArg.side = side;
     postArg.sz = qty.toPlainString();
-    if (market.lastIndexOf("-SWAP") < 0)
+    if (_SPOT.equals(marketType) || _MARGIN.equals(marketType))
       postArg.tgtCcy = "base_ccy";
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
-    int rez = id.incrementAndGet();
+    int rez = messageId.incrementAndGet();
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._order;
@@ -91,7 +99,7 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.clOrdId = clientId;
     postArg.instId = market;
     WebSocketOrderRequest<WebSocketCancelOrderArg> request = new WebSocketOrderRequest<>();
-    int rez = id.incrementAndGet();
+    int rez = messageId.incrementAndGet();
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._cancel;

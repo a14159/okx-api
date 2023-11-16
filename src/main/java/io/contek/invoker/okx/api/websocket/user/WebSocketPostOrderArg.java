@@ -10,5 +10,6 @@ public class WebSocketPostOrderArg {
     public String sz;
     public String px;
     public String tgtCcy;
+    public String ccy;
     public boolean reduceOnly;
 }

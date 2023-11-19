@@ -5,11 +5,9 @@ import io.contek.invoker.commons.websocket.AnyWebSocketMessage;
 import io.contek.invoker.commons.websocket.BaseWebSocketChannel;
 import io.contek.invoker.commons.websocket.SubscriptionState;
 import io.contek.invoker.commons.websocket.WebSocketSession;
-import io.contek.invoker.okx.api.websocket.common.WebSocketChannelArg;
-import io.contek.invoker.okx.api.websocket.common.WebSocketChannelPushData;
-import io.contek.invoker.okx.api.websocket.common.WebSocketSubscriptionRequest;
-import io.contek.invoker.okx.api.websocket.common.WebSocketSubscriptionResponse;
+import io.contek.invoker.okx.api.websocket.common.*;
 import io.contek.invoker.okx.api.websocket.common.constants.WebSocketOutboundKeys;
+import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
@@ -17,12 +15,14 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static io.contek.invoker.commons.websocket.SubscriptionState.*;
-import static io.contek.invoker.okx.api.websocket.common.constants.WebSocketInboundKeys._subscribe;
-import static io.contek.invoker.okx.api.websocket.common.constants.WebSocketInboundKeys._unsubscribe;
+import static io.contek.invoker.okx.api.websocket.common.constants.WebSocketInboundKeys.*;
+import static org.slf4j.LoggerFactory.getLogger;
 
 @ThreadSafe
 public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<?>>
     extends BaseWebSocketChannel<WebSocketChannelId<Message>, Message, Message> {
+
+  private static final Logger log = getLogger(WebSocketChannel.class);
 
   private final AtomicReference<WebSocketSubscriptionRequest> pendingRequestHolder =
       new AtomicReference<>(null);
@@ -97,6 +97,12 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
       return switch (response.event) {
         case _subscribe -> SUBSCRIBED;
         case _unsubscribe -> UNSUBSCRIBED;
+        case _error -> {
+          if (message instanceof WebSocketGeneralResponse resp) {
+            log.warn("Error while subscribing: {} {}", resp.code, resp.msg);
+          }
+          throw new IllegalArgumentException(response.event);
+        }
         default -> throw new IllegalArgumentException(response.event);
       };
     }

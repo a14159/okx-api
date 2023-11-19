@@ -58,8 +58,10 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.side = side;
     postArg.px = price.toPlainString();
     postArg.sz = qty.toPlainString();
-    if (_SPOT.equals(marketType) || _MARGIN.equals(marketType))
+    if (_SPOT.equals(marketType))
       postArg.tgtCcy = "base_ccy";
+    if (_MARGIN.equals(marketType)) // Only applicable to cross MARGIN orders in Single-currency margin.
+      postArg.ccy = "USDT";
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
     int rez = messageId.incrementAndGet();
     request.id = Integer.toString(rez);
@@ -80,8 +82,10 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.tdMode = tdMode;
     postArg.side = side;
     postArg.sz = qty.toPlainString();
-    if (_SPOT.equals(marketType) || _MARGIN.equals(marketType))
+    if (_SPOT.equals(marketType))
       postArg.tgtCcy = "base_ccy";
+    if (_MARGIN.equals(marketType)) // Only applicable to cross MARGIN orders in Single-currency margin.
+      postArg.ccy = "USDT";
     WebSocketOrderRequest<WebSocketPostOrderArg> request = new WebSocketOrderRequest<>();
     int rez = messageId.incrementAndGet();
     request.id = Integer.toString(rez);

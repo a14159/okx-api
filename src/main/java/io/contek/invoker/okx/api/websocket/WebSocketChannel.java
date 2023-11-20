@@ -99,7 +99,7 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
         case _unsubscribe -> UNSUBSCRIBED;
         case _error -> {
           if (message instanceof WebSocketGeneralResponse resp) {
-            log.warn("Error while subscribing: {} {}", resp.code, resp.msg);
+            log.warn("Error while subscribing to {}: {} {}", getId(), resp.code, resp.msg);
           }
           throw new IllegalArgumentException(response.event);
         }

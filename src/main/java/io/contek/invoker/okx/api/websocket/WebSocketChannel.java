@@ -75,6 +75,11 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
   @Override
   protected final SubscriptionState getState(AnyWebSocketMessage message) {
     if (!(message instanceof WebSocketSubscriptionResponse response)) {
+      if (message instanceof WebSocketGeneralResponse resp) {
+        if (_error.equals(resp.event)) {
+          log.warn("Error while subscribing to {}: {} {}", getId(), resp.code, resp.msg);
+        }
+      }
       return null;
     }
 
@@ -97,12 +102,6 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
       return switch (response.event) {
         case _subscribe -> SUBSCRIBED;
         case _unsubscribe -> UNSUBSCRIBED;
-        case _error -> {
-          if (message instanceof WebSocketGeneralResponse resp) {
-            log.warn("Error while subscribing to {}: {} {}", getId(), resp.code, resp.msg);
-          }
-          throw new IllegalArgumentException(response.event);
-        }
         default -> throw new IllegalArgumentException(response.event);
       };
     }

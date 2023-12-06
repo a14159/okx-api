@@ -37,6 +37,8 @@ public final class OrderBookChannel extends WebSocketMarketChannel<OrderBookChan
   public static final class Data extends _OrderBook {
 
     public Long checksum;
+    public Long prevSeqId;
+    public Long seqId;
   }
 
   @NotThreadSafe

@@ -76,7 +76,7 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
       String channel = arg.get(_channel).getAsString();
 
       return switch (channel) {
-        case _books, _books5, _books50_l2_tbt, _books_l2_tbt -> gson.fromJson(
+        case _books, _books5, _books50_l2_tbt, _books_l2_tbt, _bbo_tbt -> gson.fromJson(
                 obj, OrderBookChannel.Message.class);
         case _trades -> gson.fromJson(obj, TradesChannel.Message.class);
         case _tickers -> gson.fromJson(obj, TickersChannel.Message.class);

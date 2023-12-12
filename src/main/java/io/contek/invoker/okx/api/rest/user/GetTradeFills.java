@@ -37,6 +37,8 @@ public final class GetTradeFills extends UserRestRequest<GetTradeFills.Response>
   private String ordId;
   private Long after;
   private Long before;
+  private Long begin;
+  private Long end;
   private Integer limit;
 
   GetTradeFills(IActor actor, RestContext context) {
@@ -63,13 +65,23 @@ public final class GetTradeFills extends UserRestRequest<GetTradeFills.Response>
     return this;
   }
 
-  public GetTradeFills setAfter(@Nullable Long after) {
-    this.after = after;
+  public GetTradeFills setAfter(@Nullable Long billId) {
+    this.after = billId;
     return this;
   }
 
-  public GetTradeFills setBefore(@Nullable Long before) {
-    this.before = before;
+  public GetTradeFills setBefore(@Nullable Long billId) {
+    this.before = billId;
+    return this;
+  }
+
+  public GetTradeFills setBegin(@Nullable Long timestamp) {
+    this.begin = timestamp;
+    return this;
+  }
+
+  public GetTradeFills setEnd(@Nullable Long timestamp) {
+    this.end = timestamp;
     return this;
   }
 
@@ -124,6 +136,14 @@ public final class GetTradeFills extends UserRestRequest<GetTradeFills.Response>
 
     if (before != null) {
       builder.add("before", before);
+    }
+
+    if (begin != null) {
+      builder.add("begin", begin);
+    }
+
+    if (end != null) {
+      builder.add("end", end);
     }
 
     if (limit != null) {

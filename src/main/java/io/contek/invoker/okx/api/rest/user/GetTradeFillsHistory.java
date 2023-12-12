@@ -36,8 +36,10 @@ public final class GetTradeFillsHistory extends UserRestRequest<GetTradeFillsHis
   private String uly;
   private String instId;
   private String ordId;
-  private Long after;
   private Long before;
+  private Long after;
+  private Long begin;
+  private Long end;
   private Integer limit;
 
   GetTradeFillsHistory(IActor actor, RestContext context) {
@@ -64,13 +66,23 @@ public final class GetTradeFillsHistory extends UserRestRequest<GetTradeFillsHis
     return this;
   }
 
-  public GetTradeFillsHistory setAfter(@Nullable Long after) {
-    this.after = after;
+  public GetTradeFillsHistory setAfter(@Nullable Long billId) {
+    this.after = billId;
     return this;
   }
 
-  public GetTradeFillsHistory setBefore(@Nullable Long before) {
-    this.before = before;
+  public GetTradeFillsHistory setBefore(@Nullable Long billId) {
+    this.before = billId;
+    return this;
+  }
+
+  public GetTradeFillsHistory setBegin(@Nullable Long timestamp) {
+    this.begin = timestamp;
+    return this;
+  }
+
+  public GetTradeFillsHistory setEnd(@Nullable Long timestamp) {
+    this.end = timestamp;
     return this;
   }
 
@@ -124,6 +136,14 @@ public final class GetTradeFillsHistory extends UserRestRequest<GetTradeFillsHis
 
     if (before != null) {
       builder.add("before", before);
+    }
+
+    if (begin != null) {
+      builder.add("begin", begin);
+    }
+
+    if (end != null) {
+      builder.add("end", end);
     }
 
     if (limit != null) {

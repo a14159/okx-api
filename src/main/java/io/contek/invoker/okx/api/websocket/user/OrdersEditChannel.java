@@ -119,10 +119,13 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
   public static final class Message extends WebSocketOrderResponse<_WSOrderEditAck> {
     @Override
     public String toString() {
-      _WSOrderEditAck orderEditAck = data.get(0);
-      if (orderEditAck.sCode == null || orderEditAck.sCode.isEmpty() || "0".equals(orderEditAck.sCode))
-        return id + " " + op + " " + orderEditAck.clOrdId;
-      else return id + " " + op + " " + orderEditAck.clOrdId + " error: " + orderEditAck.sCode + " " + orderEditAck.sMsg;
+      if (data != null && !data.isEmpty()) {
+        _WSOrderEditAck orderEditAck = data.get(0);
+        if (orderEditAck.sCode == null || orderEditAck.sCode.isEmpty() || "0".equals(orderEditAck.sCode))
+          return id + " " + op + " " + orderEditAck.clOrdId;
+        else
+          return id + " " + op + " " + orderEditAck.clOrdId + " error: " + orderEditAck.sCode + " " + orderEditAck.sMsg;
+      } else return id + " " + op + " " + code + " " + msg;
     }
   }
 }

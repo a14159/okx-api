@@ -83,6 +83,7 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.tdMode = tdMode;
     postArg.side = side;
     postArg.sz = qty.toPlainString();
+    postArg.stpId = 1;
     if (_SPOT.equals(marketType))
       postArg.tgtCcy = "base_ccy";
     if (_MARGIN.equals(marketType)) // Only applicable to cross MARGIN orders in Single-currency margin.

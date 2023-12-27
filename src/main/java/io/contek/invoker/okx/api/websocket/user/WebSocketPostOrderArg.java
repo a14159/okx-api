@@ -13,4 +13,5 @@ public class WebSocketPostOrderArg {
     public String ccy;
     public boolean reduceOnly;
     public int stpId;
+    public String stpMode;
 }

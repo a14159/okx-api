@@ -2,6 +2,7 @@ package io.contek.invoker.okx.api.websocket.user;
 
 import io.contek.invoker.okx.api.common._WSOrderEditAck;
 import io.contek.invoker.okx.api.common.constants.OrderTypeKeys;
+import io.contek.invoker.okx.api.common.constants.StpModeKeys;
 import io.contek.invoker.okx.api.websocket.common.constants.WebSocketOrderOpKeys;
 
 import javax.annotation.Nullable;
@@ -59,6 +60,7 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.px = price.toPlainString();
     postArg.sz = qty.toPlainString();
     postArg.stpId = 1;
+    postArg.stpMode = StpModeKeys._cancel_taker;
     if (_SPOT.equals(marketType))
       postArg.tgtCcy = "base_ccy";
     if (_MARGIN.equals(marketType)) // Only applicable to cross MARGIN orders in Single-currency margin.
@@ -84,6 +86,7 @@ public final class OrdersEditChannel extends WebSocketUserChannel<OrdersEditChan
     postArg.side = side;
     postArg.sz = qty.toPlainString();
     postArg.stpId = 1;
+    postArg.stpMode = StpModeKeys._cancel_taker;
     if (_SPOT.equals(marketType))
       postArg.tgtCcy = "base_ccy";
     if (_MARGIN.equals(marketType)) // Only applicable to cross MARGIN orders in Single-currency margin.

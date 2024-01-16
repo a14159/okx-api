@@ -21,7 +21,7 @@ public class _Ticker {
   public BigDecimal vol24h;
   public String sodUtc0;
   public String sodUtc8;
-  public String ts;
+  public long ts;
 
   public BigDecimal getAskPx() {
     return Util.parseString(askPx, BigDecimal.ZERO);

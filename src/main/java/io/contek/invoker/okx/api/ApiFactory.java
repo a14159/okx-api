@@ -31,16 +31,26 @@ public final class ApiFactory {
 
   public static final ApiContext MAIN_NET_CONTEXT =
       ApiContext.newBuilder()
-          .setRestContext(RestContext.forBaseUrl("https://www.okx.com"))
+          .setRestContext(RestContext.newBuilder()
+                  .setBaseUrl("https://www.okx.com")
+                  .setConnectionTimeout(Duration.ofSeconds(5))
+                  .setReadTimeout(Duration.ofSeconds(2))
+                  .setWriteTimeout(Duration.ofSeconds(2))
+                  .build())
           .setWebSocketContext(
-              WebSocketContext.forBaseUrl("wss://ws.okx.com:8443", Duration.ofSeconds(15)))
+              WebSocketContext.forBaseUrl("wss://ws.okx.com:8443", Duration.ofSeconds(5)))
           .build();
 
   public static final ApiContext AWS_NET_CONTEXT =
       ApiContext.newBuilder()
-          .setRestContext(RestContext.forBaseUrl("https://aws.okx.com"))
+          .setRestContext(RestContext.newBuilder()
+                  .setBaseUrl("https://aws.okx.com")
+                  .setConnectionTimeout(Duration.ofSeconds(5))
+                  .setReadTimeout(Duration.ofSeconds(2))
+                  .setWriteTimeout(Duration.ofSeconds(2))
+                  .build())
           .setWebSocketContext(
-              WebSocketContext.forBaseUrl("wss://wsaws.okx.com:8443", Duration.ofSeconds(15)))
+              WebSocketContext.forBaseUrl("wss://wsaws.okx.com:8443", Duration.ofSeconds(5)))
           .build();
 
   public static final ApiContext TEST_CONTEXT =

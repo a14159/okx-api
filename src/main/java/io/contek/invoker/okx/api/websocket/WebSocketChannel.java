@@ -75,11 +75,6 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
   @Override
   protected final SubscriptionState getState(AnyWebSocketMessage message) {
     if (!(message instanceof WebSocketSubscriptionResponse response)) {
-      if (message instanceof WebSocketGeneralResponse resp) {
-        if (_error.equals(resp.event)) {
-          log.warn("Error while subscribing to {}: {} {}", getId(), resp.code, resp.msg);
-        }
-      }
       return null;
     }
 

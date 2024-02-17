@@ -7,7 +7,6 @@ import io.contek.invoker.commons.actor.ratelimit.TypedPermitRequest;
 import io.contek.invoker.commons.rest.RestContext;
 import io.contek.invoker.commons.rest.RestMethod;
 import io.contek.invoker.commons.rest.RestParams;
-import io.contek.invoker.okx.api.common._AccountBalance;
 import io.contek.invoker.okx.api.common._LoanDetails;
 import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 

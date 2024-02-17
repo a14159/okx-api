@@ -8,7 +8,6 @@ import io.contek.invoker.commons.rest.RestContext;
 import io.contek.invoker.commons.rest.RestMethod;
 import io.contek.invoker.commons.rest.RestParams;
 import io.contek.invoker.okx.api.common._PlaceEasyConvertAck;
-import io.contek.invoker.okx.api.common._PlaceOrderAck;
 import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 
 import javax.annotation.concurrent.NotThreadSafe;

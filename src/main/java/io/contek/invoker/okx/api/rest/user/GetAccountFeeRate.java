@@ -8,7 +8,6 @@ import io.contek.invoker.commons.rest.RestContext;
 import io.contek.invoker.commons.rest.RestMethod;
 import io.contek.invoker.commons.rest.RestParams;
 import io.contek.invoker.okx.api.common._FeeRate;
-import io.contek.invoker.okx.api.common._InterestRate;
 import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 
 import javax.annotation.concurrent.NotThreadSafe;

@@ -3,7 +3,6 @@ package io.contek.invoker.okx.api.websocket.user;
 import io.contek.invoker.okx.api.websocket.common.WebSocketChannelPushData;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.util.List;
 
 @NotThreadSafe
 public class WebSocketOrderResponse<T> extends WebSocketChannelPushData<T> {

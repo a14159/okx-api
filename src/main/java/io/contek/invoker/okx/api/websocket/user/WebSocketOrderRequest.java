@@ -1,7 +1,6 @@
 package io.contek.invoker.okx.api.websocket.user;
 
 import io.contek.invoker.okx.api.websocket.common.WebSocketOutboundMessage;
-import io.contek.invoker.okx.api.websocket.common.WebSocketRequest;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.List;

@@ -57,6 +57,7 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
     String event = obj.get(_event).getAsString();
     return switch (event) {
       case _subscribe, _unsubscribe -> toSubscriptionMessage(obj);
+      case _conn_cnt -> toConnCntMessage(obj);
       case _login, _error -> toGeneralResponse(obj);
       default -> throw new IllegalArgumentException(event);
     };
@@ -64,6 +65,10 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
 
   private WebSocketSubscriptionResponse toSubscriptionMessage(JsonObject obj) {
     return gson.fromJson(obj, WebSocketSubscriptionResponse.class);
+  }
+
+  private WebSocketConnCountResponse toConnCntMessage(JsonObject obj) {
+    return gson.fromJson(obj, WebSocketConnCountResponse.class);
   }
 
   private WebSocketGeneralResponse toGeneralResponse(JsonObject obj) {

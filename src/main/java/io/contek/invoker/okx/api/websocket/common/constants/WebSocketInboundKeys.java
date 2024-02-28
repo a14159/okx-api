@@ -18,4 +18,6 @@ public final class WebSocketInboundKeys {
   public static final String _subscribe = "subscribe";
 
   public static final String _unsubscribe = "unsubscribe";
+
+  public static final String _conn_cnt = "channel-conn-count";
 }

@@ -25,6 +25,7 @@ public class _Instrument {
   public BigDecimal lotSz;
   public BigDecimal minSz;
   public BigDecimal maxLmtSz;
+  public BigDecimal maxMktSz;
   public String ctType;
   public String alias;
   public String state;

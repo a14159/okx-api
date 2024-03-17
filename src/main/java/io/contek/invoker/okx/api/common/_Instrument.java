@@ -25,7 +25,7 @@ public class _Instrument {
   public BigDecimal lotSz;
   public BigDecimal minSz;
   public BigDecimal maxLmtSz;
-  public BigDecimal maxMktSz;
+  public String maxMktSz;
   public String ctType;
   public String alias;
   public String state;
@@ -36,5 +36,9 @@ public class _Instrument {
 
   public BigDecimal getCtMult() {
     return Util.parseString(ctMult, BigDecimal.ONE);
+  }
+
+  public BigDecimal getMaxMktSz() {
+    return Util.parseString(maxMktSz, BigDecimal.valueOf(1000000000000000000L));
   }
 }

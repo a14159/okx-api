@@ -22,7 +22,7 @@ public final class WebSocketLiveKeeper implements IWebSocketLiveKeeper {
 
   private static final Logger log = getLogger(WebSocketLiveKeeper.class);
 
-  private static final Duration PING_INTERVAL = Duration.ofSeconds(20);
+  private static final Duration PING_INTERVAL = Duration.ofSeconds(25);
 
   private final String name;
   private final Clock clock;

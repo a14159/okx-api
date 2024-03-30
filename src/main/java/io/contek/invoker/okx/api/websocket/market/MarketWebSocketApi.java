@@ -25,7 +25,7 @@ public final class MarketWebSocketApi extends WebSocketApi {
       new HashMap<>();
 
   public MarketWebSocketApi(String name, IActor actor, WebSocketContext context) {
-    super(name, actor); // "name" here" is used by the live keeper thread to log/report events
+    super(name, actor); // "name" here is used by the live keeper thread to log/report events
     this.name = name;
     this.context = context;
   }

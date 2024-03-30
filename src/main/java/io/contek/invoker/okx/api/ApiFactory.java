@@ -33,31 +33,31 @@ public final class ApiFactory {
       ApiContext.newBuilder()
           .setRestContext(RestContext.newBuilder()
                   .setBaseUrl("https://www.okx.com")
-                  .setConnectionTimeout(Duration.ofSeconds(5))
-                  .setReadTimeout(Duration.ofSeconds(2))
-                  .setWriteTimeout(Duration.ofSeconds(2))
+                  .setConnectionTimeout(Duration.ofSeconds(3))
+                  .setReadTimeout(Duration.ofSeconds(1))
+                  .setWriteTimeout(Duration.ofSeconds(1))
                   .build())
           .setWebSocketContext(
-              WebSocketContext.forBaseUrl("wss://ws.okx.com:8443", Duration.ofSeconds(20)))
+              WebSocketContext.forBaseUrl("wss://ws.okx.com:8443", Duration.ofSeconds(25)))
           .build();
 
   public static final ApiContext AWS_NET_CONTEXT =
       ApiContext.newBuilder()
           .setRestContext(RestContext.newBuilder()
                   .setBaseUrl("https://aws.okx.com")
-                  .setConnectionTimeout(Duration.ofSeconds(5))
-                  .setReadTimeout(Duration.ofSeconds(2))
-                  .setWriteTimeout(Duration.ofSeconds(2))
+                  .setConnectionTimeout(Duration.ofSeconds(3))
+                  .setReadTimeout(Duration.ofSeconds(1))
+                  .setWriteTimeout(Duration.ofSeconds(1))
                   .build())
           .setWebSocketContext(
-              WebSocketContext.forBaseUrl("wss://wsaws.okx.com:8443", Duration.ofSeconds(20)))
+              WebSocketContext.forBaseUrl("wss://wsaws.okx.com:8443", Duration.ofSeconds(25)))
           .build();
 
   public static final ApiContext TEST_CONTEXT =
           ApiContext.newBuilder()
                   .setRestContext(RestContext.forBaseUrl("https://www.okx.com"))
                   .setWebSocketContext(
-                          WebSocketContext.forBaseUrl("wss://wspap.okx.com:8443", Duration.ofSeconds(15)))
+                          WebSocketContext.forBaseUrl("wss://wspap.okx.com:8443", Duration.ofSeconds(25)))
                   .build();
 
   private final ApiContext context;

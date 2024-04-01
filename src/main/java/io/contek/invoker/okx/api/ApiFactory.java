@@ -38,7 +38,7 @@ public final class ApiFactory {
                   .setWriteTimeout(Duration.ofSeconds(1))
                   .build())
           .setWebSocketContext(
-              WebSocketContext.forBaseUrl("wss://ws.okx.com:8443", Duration.ofSeconds(60)))
+              WebSocketContext.forBaseUrl("wss://ws.okx.com:8443", Duration.ofSeconds(0)))
           .build();
 
   public static final ApiContext AWS_NET_CONTEXT =
@@ -50,14 +50,14 @@ public final class ApiFactory {
                   .setWriteTimeout(Duration.ofSeconds(1))
                   .build())
           .setWebSocketContext(
-              WebSocketContext.forBaseUrl("wss://wsaws.okx.com:8443", Duration.ofSeconds(60)))
+              WebSocketContext.forBaseUrl("wss://wsaws.okx.com:8443", Duration.ofSeconds(0)))
           .build();
 
   public static final ApiContext TEST_CONTEXT =
           ApiContext.newBuilder()
                   .setRestContext(RestContext.forBaseUrl("https://www.okx.com"))
                   .setWebSocketContext(
-                          WebSocketContext.forBaseUrl("wss://wspap.okx.com:8443", Duration.ofSeconds(25)))
+                          WebSocketContext.forBaseUrl("wss://wspap.okx.com:8443", Duration.ofSeconds(0)))
                   .build();
 
   private final ApiContext context;

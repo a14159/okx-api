@@ -8,10 +8,10 @@ public class _Fill {
 
   public String instType;
   public String instId;
-  public long tradeId;
-  public long ordId;
+  public String tradeId;
+  public String ordId;
   public String clOrdId;
-  public long billId;
+  public String billId;
   public String tag;
   public BigDecimal fillPx;
   public BigDecimal fillSz;

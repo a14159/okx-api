@@ -26,7 +26,7 @@ public class _Order {
   public String instId;
   public String instType;
   public String lever;
-  public long ordId;
+  public String ordId;
   public String ordType;
   public String pnl;
   public String posSide;

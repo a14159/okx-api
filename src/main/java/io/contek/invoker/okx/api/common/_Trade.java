@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class _Trade {
 
   public String instId;
-  public long tradeId;
+  public String tradeId;
   public BigDecimal px;
   public BigDecimal sz;
   public String side;

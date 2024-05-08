@@ -67,10 +67,6 @@ public class _Order {
     return Util.parseString(fillTime, 0);
   }
 
-  public long getTradeId() {
-    return Util.parseString(tradeId, 0);
-  }
-
   @Override
   public String toString() {
     return "_Order{" +

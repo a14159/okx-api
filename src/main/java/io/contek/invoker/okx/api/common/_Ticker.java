@@ -22,6 +22,7 @@ public class _Ticker {
   public String sodUtc0;
   public String sodUtc8;
   public long ts;
+  public long traceNano = System.nanoTime();
 
   public BigDecimal getAskPx() {
     return Util.parseString(askPx, BigDecimal.ZERO);

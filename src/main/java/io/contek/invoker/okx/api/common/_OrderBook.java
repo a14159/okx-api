@@ -9,4 +9,5 @@ public class _OrderBook {
   public List<_OrderBookLevel> asks;
   public List<_OrderBookLevel> bids;
   public long ts;
+  public long traceNano = System.nanoTime();
 }

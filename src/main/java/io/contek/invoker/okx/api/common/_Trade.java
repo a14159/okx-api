@@ -12,4 +12,5 @@ public class _Trade {
   public BigDecimal sz;
   public String side;
   public long ts;
+  public long traceNano = System.nanoTime();
 }

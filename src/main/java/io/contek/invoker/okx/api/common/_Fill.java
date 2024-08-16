@@ -22,4 +22,5 @@ public class _Fill {
   public BigDecimal fee;
   public long ts;
   public long fillTime;
+  public long traceNano = System.nanoTime();
 }

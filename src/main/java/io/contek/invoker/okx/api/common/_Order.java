@@ -50,6 +50,7 @@ public class _Order {
   public String tpTriggerPxType;
   public String tradeId;
   public long uTime;
+  public long traceNano = System.nanoTime();
 
   public BigDecimal getPx() {
     return Util.parseString(px, BigDecimal.ZERO);

@@ -13,4 +13,9 @@ public abstract class WebSocketUserChannel<Message extends WebSocketChannelPushD
   protected WebSocketUserChannel(WebSocketChannelId<Message> id) {
     super(id);
   }
+
+  @Override
+  public String toString() {
+    return getId().toString();
+  }
 }

@@ -13,4 +13,9 @@ public abstract class WebSocketMarketChannel<Message extends WebSocketChannelPus
   protected WebSocketMarketChannel(WebSocketChannelId<Message> id) {
     super(id);
   }
+
+  @Override
+  public String toString() {
+    return getId().toString();
+  }
 }

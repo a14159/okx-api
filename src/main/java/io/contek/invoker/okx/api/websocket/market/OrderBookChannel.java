@@ -33,6 +33,11 @@ public final class OrderBookChannel extends WebSocketMarketChannel<OrderBookChan
     }
   }
 
+  @Override
+  public String toString() {
+    return getId().toString();
+  }
+
   @NotThreadSafe
   public static final class Data extends _OrderBook {
 

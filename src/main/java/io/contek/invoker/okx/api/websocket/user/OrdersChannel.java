@@ -22,6 +22,11 @@ public final class OrdersChannel extends WebSocketUserChannel<OrdersChannel.Mess
     return Message.class;
   }
 
+  @Override
+  public String toString() {
+    return getId().toString();
+  }
+
   @Immutable
   public static final class Id extends WebSocketUserChannelId<Message> {
 

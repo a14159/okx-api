@@ -9,7 +9,7 @@ public class _AccountBalance {
 
   public String adjEq; // Adjusted / Effective equity in USD
   public String imr; // Initial margin requirement in USD
-  public BigDecimal isoEq; // Isolated margin equity in USD
+  public String isoEq; // Isolated margin equity in USD
   public String mgnRatio; // Margin ratio in USD
   public String mmr; // Maintenance margin requirement in USD
   public String notionalUsd; // Notional value of positions in USD

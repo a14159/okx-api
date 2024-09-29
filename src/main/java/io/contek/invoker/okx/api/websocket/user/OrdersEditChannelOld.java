@@ -3,7 +3,6 @@ package io.contek.invoker.okx.api.websocket.user;
 import io.contek.invoker.okx.api.common._WSOrderEditAck;
 import io.contek.invoker.okx.api.common.constants.OrderTypeKeys;
 import io.contek.invoker.okx.api.common.constants.StpModeKeys;
-import io.contek.invoker.okx.api.websocket.WebSocketNoSubscribeId;
 import io.contek.invoker.okx.api.websocket.common.constants.WebSocketOrderOpKeys;
 
 import javax.annotation.Nullable;
@@ -16,15 +15,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static io.contek.invoker.okx.api.common.constants.InstrumentTypeKeys._MARGIN;
 import static io.contek.invoker.okx.api.common.constants.InstrumentTypeKeys._SPOT;
+import static io.contek.invoker.okx.api.websocket.common.constants.WebSocketChannelKeys._orders;
 
 @ThreadSafe
-public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<OrdersEditChannel.Message> {
+public final class OrdersEditChannelOld extends WebSocketUserChannel<OrdersEditChannelOld.Message> {
 
   private final AtomicInteger messageId = new AtomicInteger(0);
 
   private final String marketType;
 
-  OrdersEditChannel(OrdersEditChannel.Id id) {
+  OrdersEditChannelOld(OrdersEditChannelOld.Id id) {
     super(id);
     this.marketType = id.type;
   }
@@ -35,12 +35,12 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
   }
 
   @Immutable
-  public static final class Id extends WebSocketNoSubscribeId<Message> {
+  public static final class Id extends WebSocketUserChannelId<Message> {
 
     private final String type;
 
     private Id(String type, @Nullable String instId) {
-      super("edit_orders." + type + "." + instId);
+      super(_orders, type, instId);
       this.type = type;
     }
 

@@ -22,11 +22,24 @@ public final class UserWebSocketApi extends WebSocketApi {
   private final Map<OrdersEditChannelOld.Id, OrdersEditChannelOld> ordersEditChannelsOld = new HashMap<>();
   private final Map<OrdersEditChannel.Id, OrdersEditChannel> ordersEditChannels = new HashMap<>();
   private final Map<PositionsChannel.Id, PositionsChannel> positionsChannels = new HashMap<>();
+  private final Map<FillsChannel.Id, FillsChannel> fillsChannels = new HashMap<>();
 
   public UserWebSocketApi(String name, IActor actor, WebSocketContext context) {
     super(name, actor);
     this.name = name;
     this.context = context;
+  }
+
+  public FillsChannel getFillsChannel(@Nullable String instId) {
+    synchronized (fillsChannels) {
+      return fillsChannels.computeIfAbsent(
+          FillsChannel.Id.of(instId),
+          k -> {
+            FillsChannel result = new FillsChannel(k);
+            attach(result);
+            return result;
+          });
+    }
   }
 
   public OrdersChannel getOrdersChannel(String type, @Nullable String instId) {

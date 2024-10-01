@@ -29,6 +29,8 @@ public final class WebSocketChannelKeys {
 
   public static final String _orders = "orders";
 
+  public static final String _fills = "fills";
+
   public static String books(int depth, boolean l2, boolean tbt) {
     if (l2) {
       if (depth == 50) {

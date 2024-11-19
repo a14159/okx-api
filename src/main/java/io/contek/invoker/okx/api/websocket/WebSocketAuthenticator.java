@@ -8,18 +8,18 @@ import io.contek.invoker.okx.api.rest.RestRequest;
 import io.contek.invoker.okx.api.websocket.common.WebSocketLoginRequest;
 import io.contek.invoker.okx.api.websocket.common.constants.WebSocketOutboundKeys;
 import io.contek.invoker.security.ICredential;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.time.Clock;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static org.slf4j.LoggerFactory.getLogger;
 
 @ThreadSafe
 public final class WebSocketAuthenticator implements IWebSocketAuthenticator {
 
-  private static final Logger log = getLogger(WebSocketAuthenticator.class);
+  private static final Logger log = LogManager.getLogger(WebSocketAuthenticator.class);
 
   private final ICredential credential;
   private final Clock clock;

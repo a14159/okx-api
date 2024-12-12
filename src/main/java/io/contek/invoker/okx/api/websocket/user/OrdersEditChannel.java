@@ -118,7 +118,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     if (session != null) {
       session.send(request);
       return rez;
-    }
+    } else log.warn("Trying to cancel an order but we don't have the session");
     return -1;
   }
 

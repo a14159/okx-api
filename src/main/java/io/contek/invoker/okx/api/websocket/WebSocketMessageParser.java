@@ -57,15 +57,15 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
   }
 
   private WebSocketSubscriptionResponse toSubscriptionMessage(JSONObject obj) {
-    return JSON.toJavaObject(obj, WebSocketSubscriptionResponse.class);
+    return JSON.to(WebSocketSubscriptionResponse.class, obj);
   }
 
   private WebSocketConnCountResponse toConnCntMessage(JSONObject obj) {
-    return JSON.toJavaObject(obj, WebSocketConnCountResponse.class);
+    return JSON.to(WebSocketConnCountResponse.class, obj);
   }
 
   private WebSocketGeneralResponse toGeneralResponse(JSONObject obj) {
-    return JSON.toJavaObject(obj, WebSocketGeneralResponse.class);
+    return JSON.to(WebSocketGeneralResponse.class, obj);
   }
 
   private WebSocketChannelPushData<?> toPushData(JSONObject obj) {
@@ -87,7 +87,7 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
 
     if (obj.containsKey(_id)) {
       // channel is _orders
-      return JSON.toJavaObject(obj, OrdersEditChannelOld.Message.class);
+      return JSON.to(OrdersEditChannelOld.Message.class, obj);
     }
 
     return null;

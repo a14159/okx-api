@@ -5,6 +5,8 @@ import io.contek.invoker.okx.api.common.constants.OrderTypeKeys;
 import io.contek.invoker.okx.api.common.constants.StpModeKeys;
 import io.contek.invoker.okx.api.websocket.WebSocketNoSubscribeId;
 import io.contek.invoker.okx.api.websocket.common.constants.WebSocketOrderOpKeys;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
@@ -19,6 +21,8 @@ import static io.contek.invoker.okx.api.common.constants.InstrumentTypeKeys._SPO
 
 @ThreadSafe
 public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<OrdersEditChannel.Message> {
+
+  public static final Logger log = LogManager.getLogger(OrdersEditChannel.class);
 
   private final AtomicInteger messageId = new AtomicInteger(0);
 
@@ -72,7 +76,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     if (session != null) {
       session.send(request);
       return rez;
-    }
+    } else log.warn("Trying to place a limit order but we don't have the session");
     return -1;
   }
 
@@ -98,7 +102,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     if (session != null) {
       session.send(request);
       return rez;
-    }
+    } else log.warn("Trying to place a market order but we don't have the session");
     return -1;
   }
 

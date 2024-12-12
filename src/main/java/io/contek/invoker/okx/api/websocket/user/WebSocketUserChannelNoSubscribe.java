@@ -30,7 +30,6 @@ public abstract class WebSocketUserChannelNoSubscribe<Message extends WebSocketC
 
   @Override
   protected SubscriptionState subscribe(WebSocketSession webSocketSession) {
-//    System.out.println("[UserWebSocketNoSubscribeChannel] SUBSCRIBE was called");
     this.session = webSocketSession;
     // send ping request to move to subscribed state faster (will happen in BaseChannel on message received)
     session.send(new WebSocketPing());
@@ -40,14 +39,12 @@ public abstract class WebSocketUserChannelNoSubscribe<Message extends WebSocketC
 
   @Override
   protected SubscriptionState unsubscribe(WebSocketSession webSocketSession) {
-//    System.out.println("[UserWebSocketNoSubscribeChannel] UNSUBSCRIBE was called");
     lastStatusSent = UNSUBSCRIBING;
     return UNSUBSCRIBING;
   }
 
   @Override
   protected void reset() {
-//    System.out.println("[UserWebSocketNoSubscribeChannel] RESET was called");
     session = null;
   }
 

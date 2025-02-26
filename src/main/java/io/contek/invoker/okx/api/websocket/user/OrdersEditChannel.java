@@ -122,6 +122,22 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     return -1;
   }
 
+  public int cancelOrderById(String market, String orderId) {
+    WebSocketCancelOrderArg postArg = new WebSocketCancelOrderArg();
+    postArg.ordId = orderId;
+    postArg.instId = market;
+    WebSocketOrderRequest<WebSocketCancelOrderArg> request = new WebSocketOrderRequest<>();
+    int rez = messageId.incrementAndGet();
+    request.id = Integer.toString(rez);
+    request.args = List.of(postArg);
+    request.op = WebSocketOrderOpKeys._cancel;
+    if (session != null) {
+      session.send(request);
+      return rez;
+    } else log.warn("Trying to cancel an order but we don't have the session");
+    return -1;
+  }
+
   @NotThreadSafe
   public static final class Message extends WebSocketOrderResponse<_WSOrderEditAck> {
     @Override

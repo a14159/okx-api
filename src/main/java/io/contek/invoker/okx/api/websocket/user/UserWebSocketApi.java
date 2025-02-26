@@ -19,7 +19,6 @@ public final class UserWebSocketApi extends WebSocketApi {
   private final String name;
 
   private final Map<OrdersChannel.Id, OrdersChannel> ordersChannels = new HashMap<>();
-  private final Map<OrdersEditChannelOld.Id, OrdersEditChannelOld> ordersEditChannelsOld = new HashMap<>();
   private final Map<OrdersEditChannel.Id, OrdersEditChannel> ordersEditChannels = new HashMap<>();
   private final Map<PositionsChannel.Id, PositionsChannel> positionsChannels = new HashMap<>();
   private final Map<FillsChannel.Id, FillsChannel> fillsChannels = new HashMap<>();
@@ -48,18 +47,6 @@ public final class UserWebSocketApi extends WebSocketApi {
           OrdersChannel.Id.of(type, instId),
           k -> {
             OrdersChannel result = new OrdersChannel(k);
-            attach(result);
-            return result;
-          });
-    }
-  }
-
-  public OrdersEditChannelOld getOrdersEditChannelOld(String type, @Nullable String instId) {
-    synchronized (ordersEditChannelsOld) {
-      return ordersEditChannelsOld.computeIfAbsent(
-          OrdersEditChannelOld.Id.of(type, instId),
-          k -> {
-            OrdersEditChannelOld result = new OrdersEditChannelOld(k);
             attach(result);
             return result;
           });

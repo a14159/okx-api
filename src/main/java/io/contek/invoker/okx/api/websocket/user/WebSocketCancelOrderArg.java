@@ -4,4 +4,5 @@ public class WebSocketCancelOrderArg {
 
     public String instId;
     public String clOrdId;
+    public String ordId;
 }

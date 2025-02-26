@@ -7,7 +7,7 @@ import io.contek.invoker.commons.websocket.WebSocketTextMessageParser;
 import io.contek.invoker.okx.api.websocket.common.*;
 import io.contek.invoker.okx.api.websocket.market.*;
 import io.contek.invoker.okx.api.websocket.user.OrdersChannel;
-import io.contek.invoker.okx.api.websocket.user.OrdersEditChannelOld;
+import io.contek.invoker.okx.api.websocket.user.OrdersEditChannel;
 import io.contek.invoker.okx.api.websocket.user.PositionsChannel;
 
 import javax.annotation.concurrent.Immutable;
@@ -87,7 +87,7 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
 
     if (obj.containsKey(_id)) {
       // channel is _orders
-      return JSON.to(OrdersEditChannelOld.Message.class, obj);
+      return JSON.to(OrdersEditChannel.Message.class, obj);
     }
 
     return null;

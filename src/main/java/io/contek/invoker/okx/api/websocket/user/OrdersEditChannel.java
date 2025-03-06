@@ -106,6 +106,25 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     return -1;
   }
 
+
+  public int amendOrder(String market, String ordId, String clientId, BigDecimal price, BigDecimal qty) {
+    WebSocketAmendOrderArg postArg = new WebSocketAmendOrderArg();
+    postArg.instId = market;
+    postArg.clOrdId = clientId;
+    postArg.newPx = price.toPlainString();
+    postArg.newSz = qty.toPlainString();
+    WebSocketOrderRequest<WebSocketAmendOrderArg> request = new WebSocketOrderRequest<>();
+    int rez = messageId.incrementAndGet();
+    request.id = Integer.toString(rez);
+    request.args = List.of(postArg);
+    request.op = WebSocketOrderOpKeys._amend;
+    if (session != null) {
+      session.send(request);
+      return rez;
+    } else log.warn("Trying to place a limit order but we don't have the session");
+    return -1;
+  }
+
   public int cancelOrder(String market, String clientId) {
     WebSocketCancelOrderArg postArg = new WebSocketCancelOrderArg();
     postArg.clOrdId = clientId;

@@ -110,6 +110,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
   public int amendOrder(String market, String ordId, String clientId, BigDecimal price, BigDecimal qty) {
     WebSocketAmendOrderArg postArg = new WebSocketAmendOrderArg();
     postArg.instId = market;
+    postArg.ordId = ordId;
     postArg.clOrdId = clientId;
     postArg.newPx = price.toPlainString();
     postArg.newSz = qty.toPlainString();

@@ -7,7 +7,6 @@ import io.contek.invoker.commons.actor.SimpleActorFactory;
 import io.contek.invoker.commons.actor.http.SimpleHttpClientFactory;
 import io.contek.invoker.commons.actor.ratelimit.IRateLimitQuotaInterceptor;
 import io.contek.invoker.commons.actor.ratelimit.LimiterManagers;
-import io.contek.invoker.commons.actor.ratelimit.SimpleRateLimitThrottleFactory;
 import io.contek.invoker.commons.rest.RestContext;
 import io.contek.invoker.commons.websocket.WebSocketContext;
 import io.contek.invoker.okx.api.rest.market.*;
@@ -97,8 +96,8 @@ public final class ApiFactory {
     return SimpleActorFactory.newBuilder()
         .setCredentialFactory(createCredentialFactory())
         .setHttpClientFactory(SimpleHttpClientFactory.getInstance())
-        .setRateLimitThrottleFactory(
-            SimpleRateLimitThrottleFactory.create(createLimiterManager(), interceptors))
+//        .setRateLimitThrottleFactory(
+//            SimpleRateLimitThrottleFactory.create(createLimiterManager(), interceptors))
         .build();
   }
 

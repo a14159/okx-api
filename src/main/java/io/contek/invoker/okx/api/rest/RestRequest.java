@@ -1,6 +1,5 @@
 package io.contek.invoker.okx.api.rest;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.net.UrlEscapers;
 import io.contek.invoker.commons.actor.IActor;
 import io.contek.invoker.commons.actor.http.AnyHttpException;
@@ -13,6 +12,8 @@ import javax.annotation.concurrent.NotThreadSafe;
 import java.time.Clock;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.HashMap;
+import java.util.Map;
 
 import static io.contek.invoker.commons.rest.RestMediaType.JSON;
 import static java.time.ZoneOffset.UTC;
@@ -79,23 +80,21 @@ public abstract class RestRequest<R extends ResponseWrapper<?>> extends BaseRest
     throw new ParsedHttpException(response.getCode(), result, response.getStringValue());
   }
 
-  private ImmutableMap<String, String> generateHeaders(
-      String paramsString, String bodyString, ICredential credential) {
+  private Map<String, String> generateHeaders(String paramsString, String bodyString, ICredential credential) {
     if (credential.isAnonymous()) {
-      return ImmutableMap.of();
+      return Map.of();
     }
     String ts = FORMATTER.format(clock.instant());
     String payload = ts + getMethod() + getEndpointPath() + paramsString + bodyString;
     String signature = credential.sign(payload);
 
-    ImmutableMap.Builder<String, String> result =
-        ImmutableMap.<String, String>builder()
-            .put("OK-ACCESS-KEY", credential.getApiKeyId())
-            .put("OK-ACCESS-SIGN", signature)
-            .put("OK-ACCESS-TIMESTAMP", ts);
-    credential.getProperties().forEach(result::put);
+    Map<String, String> result = new HashMap<>();
+    result.put("OK-ACCESS-KEY", credential.getApiKeyId());
+    result.put("OK-ACCESS-SIGN", signature);
+    result.put("OK-ACCESS-TIMESTAMP", ts);
+    result.putAll(credential.getProperties());
 
-    return result.build();
+    return result;
   }
 
   private String buildParamsString() {

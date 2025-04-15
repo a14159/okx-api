@@ -1,6 +1,5 @@
 package io.contek.invoker.okx.api.rest.market;
 
-import com.google.common.collect.ImmutableList;
 import io.contek.invoker.commons.actor.IActor;
 import io.contek.invoker.commons.actor.ratelimit.RateLimitRule;
 import io.contek.invoker.commons.actor.ratelimit.TypedPermitRequest;
@@ -11,6 +10,7 @@ import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.time.Duration;
+import java.util.List;
 
 import static io.contek.invoker.commons.actor.ratelimit.LimitType.IP;
 import static java.util.Objects.requireNonNull;
@@ -26,8 +26,8 @@ public final class GetMarketCandles extends MarketRestRequest<GetMarketCandles.R
           .setResetPeriod(Duration.ofSeconds(2))
           .build();
 
-  private static final ImmutableList<TypedPermitRequest> REQUIRED_QUOTA =
-      ImmutableList.of(RATE_LIMIT_RULE.forPermits(1));
+  private static final List<TypedPermitRequest> REQUIRED_QUOTA =
+      List.of(RATE_LIMIT_RULE.forPermits(1));
 
   private String instId;
   private Long after;
@@ -101,7 +101,7 @@ public final class GetMarketCandles extends MarketRestRequest<GetMarketCandles.R
   }
 
   @Override
-  protected ImmutableList<TypedPermitRequest> getRequiredQuotas() {
+  protected List<TypedPermitRequest> getRequiredQuotas() {
     return REQUIRED_QUOTA;
   }
 

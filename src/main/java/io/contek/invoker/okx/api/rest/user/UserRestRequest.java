@@ -7,13 +7,13 @@ import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 @NotThreadSafe
 abstract class UserRestRequest<T extends ResponseWrapper<?>> extends RestRequest<T> {
 
   UserRestRequest(IActor actor, RestContext context) {
     super(actor, context);
-    checkArgument(!actor.getCredential().isAnonymous());
+    if (actor.getCredential().isAnonymous()) {
+      throw new IllegalArgumentException();
+    }
   }
 }

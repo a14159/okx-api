@@ -1,6 +1,5 @@
 package io.contek.invoker.okx.api.rest.user;
 
-import com.google.common.collect.ImmutableList;
 import io.contek.invoker.commons.actor.IActor;
 import io.contek.invoker.commons.actor.ratelimit.RateLimitRule;
 import io.contek.invoker.commons.actor.ratelimit.TypedPermitRequest;
@@ -14,6 +13,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.List;
 
 import static io.contek.invoker.commons.actor.ratelimit.LimitType.API_KEY;
 import static io.contek.invoker.commons.rest.RestMethod.POST;
@@ -30,8 +30,8 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
           .setResetPeriod(Duration.ofSeconds(2))
           .build();
 
-  private static final ImmutableList<TypedPermitRequest> REQUIRED_QUOTA =
-      ImmutableList.of(RATE_LIMIT_RULE.forPermits(1));
+  private static final List<TypedPermitRequest> REQUIRED_QUOTA =
+      List.of(RATE_LIMIT_RULE.forPermits(1));
 
   private String instId;
   private String tdMode;
@@ -226,7 +226,7 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
   }
 
   @Override
-  protected ImmutableList<TypedPermitRequest> getRequiredQuotas() {
+  protected List<TypedPermitRequest> getRequiredQuotas() {
     return REQUIRED_QUOTA;
   }
 

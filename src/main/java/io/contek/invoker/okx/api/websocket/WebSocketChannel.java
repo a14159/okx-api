@@ -1,6 +1,5 @@
 package io.contek.invoker.okx.api.websocket;
 
-import com.google.common.collect.ImmutableList;
 import io.contek.invoker.commons.websocket.AnyWebSocketMessage;
 import io.contek.invoker.commons.websocket.BaseWebSocketChannel;
 import io.contek.invoker.commons.websocket.SubscriptionState;
@@ -13,6 +12,7 @@ import io.contek.invoker.okx.api.websocket.common.constants.WebSocketOutboundKey
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -48,7 +48,7 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
 
       WebSocketSubscriptionRequest request = new WebSocketSubscriptionRequest();
       request.op = WebSocketOutboundKeys._subscribe;
-      request.args = ImmutableList.of(getId().toChannelArg());
+      request.args = List.of(getId().toChannelArg());
       session.send(request);
       pendingRequestHolder.set(request);
     }
@@ -64,7 +64,7 @@ public abstract class WebSocketChannel<Message extends WebSocketChannelPushData<
 
       WebSocketSubscriptionRequest request = new WebSocketSubscriptionRequest();
       request.op = WebSocketOutboundKeys._unsubscribe;
-      request.args = ImmutableList.of(getId().toChannelArg());
+      request.args = List.of(getId().toChannelArg());
       session.send(request);
       pendingRequestHolder.set(request);
     }

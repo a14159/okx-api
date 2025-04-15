@@ -1,6 +1,5 @@
 package io.contek.invoker.okx.api.websocket;
 
-import com.google.common.collect.ImmutableList;
 import io.contek.invoker.commons.websocket.AnyWebSocketMessage;
 import io.contek.invoker.commons.websocket.IWebSocketAuthenticator;
 import io.contek.invoker.commons.websocket.WebSocketSession;
@@ -13,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.time.Clock;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -45,7 +45,7 @@ public final class WebSocketAuthenticator implements IWebSocketAuthenticator {
     arg.passphrase = credential.getProperties().get(RestRequest.OK_ACCESS_PASSPHRASE);
     arg.timestamp = currentSeconds;
     arg.sign = credential.sign(arg.timestamp + "GET/users/self/verify");
-    request.args = ImmutableList.of(arg);
+    request.args = List.of(arg);
 
     log.info("Requesting authentication for {}.", credential.getApiKeyId());
     session.send(request);

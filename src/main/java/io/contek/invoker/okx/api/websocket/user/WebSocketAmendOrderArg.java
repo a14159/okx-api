@@ -1,7 +1,5 @@
 package io.contek.invoker.okx.api.websocket.user;
 
-import java.math.BigDecimal;
-
 public class WebSocketAmendOrderArg {
 
     public String instId;

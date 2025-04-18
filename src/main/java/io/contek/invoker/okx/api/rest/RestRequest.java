@@ -6,7 +6,7 @@ import io.contek.invoker.commons.actor.http.ParsedHttpException;
 import io.contek.invoker.commons.rest.*;
 import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 import io.contek.invoker.security.ICredential;
-import removing.dependencies.Escapers;
+import is.fm.util.Escapers;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.time.Clock;

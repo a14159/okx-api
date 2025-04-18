@@ -17,12 +17,12 @@ import io.contek.invoker.okx.api.websocket.user.UserWebSocketApi;
 import io.contek.invoker.security.ApiKey;
 import io.contek.invoker.security.SimpleCredentialFactory;
 import io.contek.ursa.cache.LimiterManager;
+import removing.dependencies.BaseEncoding;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.time.Duration;
 import java.util.List;
 
-import static com.google.common.io.BaseEncoding.base64;
 import static io.contek.invoker.security.SecretKeyAlgorithm.HMAC_SHA256;
 
 @ThreadSafe
@@ -104,7 +104,7 @@ public final class ApiFactory {
   private static SimpleCredentialFactory createCredentialFactory() {
     return SimpleCredentialFactory.newBuilder()
         .setAlgorithm(HMAC_SHA256)
-        .setEncoding(base64())
+        .setEncoding(BaseEncoding.base64())
         .build();
   }
 

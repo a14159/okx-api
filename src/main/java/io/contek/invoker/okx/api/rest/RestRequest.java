@@ -1,12 +1,12 @@
 package io.contek.invoker.okx.api.rest;
 
-import com.google.common.net.UrlEscapers;
 import io.contek.invoker.commons.actor.IActor;
 import io.contek.invoker.commons.actor.http.AnyHttpException;
 import io.contek.invoker.commons.actor.http.ParsedHttpException;
 import io.contek.invoker.commons.rest.*;
 import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 import io.contek.invoker.security.ICredential;
+import removing.dependencies.Escapers;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.time.Clock;
@@ -102,7 +102,7 @@ public abstract class RestRequest<R extends ResponseWrapper<?>> extends BaseRest
     if (params.isEmpty()) {
       return "";
     }
-    return "?" + params.getQueryString(UrlEscapers.urlPathSegmentEscaper());
+    return "?" + params.getQueryString(Escapers.urlPathSegmentEscaper());
   }
 
   private String buildUrlString(String paramsString) {

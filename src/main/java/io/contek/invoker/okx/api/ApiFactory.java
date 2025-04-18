@@ -5,23 +5,18 @@ import io.contek.invoker.commons.actor.IActor;
 import io.contek.invoker.commons.actor.IActorFactory;
 import io.contek.invoker.commons.actor.SimpleActorFactory;
 import io.contek.invoker.commons.actor.http.SimpleHttpClientFactory;
-import io.contek.invoker.commons.actor.ratelimit.IRateLimitQuotaInterceptor;
-import io.contek.invoker.commons.actor.ratelimit.LimiterManagers;
 import io.contek.invoker.commons.rest.RestContext;
 import io.contek.invoker.commons.websocket.WebSocketContext;
-import io.contek.invoker.okx.api.rest.market.*;
-import io.contek.invoker.okx.api.rest.user.*;
-import io.contek.invoker.okx.api.websocket.WebSocketApi;
+import io.contek.invoker.okx.api.rest.market.MarketRestApi;
+import io.contek.invoker.okx.api.rest.user.UserRestApi;
 import io.contek.invoker.okx.api.websocket.market.MarketWebSocketApi;
 import io.contek.invoker.okx.api.websocket.user.UserWebSocketApi;
 import io.contek.invoker.security.ApiKey;
 import io.contek.invoker.security.SimpleCredentialFactory;
-import io.contek.ursa.cache.LimiterManager;
 import is.fm.util.BaseEncoding;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.time.Duration;
-import java.util.List;
 
 import static io.contek.invoker.security.SecretKeyAlgorithm.HMAC_SHA256;
 
@@ -80,7 +75,7 @@ public final class ApiFactory {
   }
 
   public static ApiFactory fromContext(ApiContext context) {
-    return new ApiFactory(context, createActorFactory(context.getInterceptors()));
+    return new ApiFactory(context, createActorFactory());
   }
 
   public SelectingRestApi rest() {
@@ -91,13 +86,10 @@ public final class ApiFactory {
     return new SelectingWebSocketApi();
   }
 
-  private static SimpleActorFactory createActorFactory(
-      List<IRateLimitQuotaInterceptor> interceptors) {
+  private static SimpleActorFactory createActorFactory() {
     return SimpleActorFactory.newBuilder()
         .setCredentialFactory(createCredentialFactory())
         .setHttpClientFactory(SimpleHttpClientFactory.getInstance())
-//        .setRateLimitThrottleFactory(
-//            SimpleRateLimitThrottleFactory.create(createLimiterManager(), interceptors))
         .build();
   }
 
@@ -106,44 +98,6 @@ public final class ApiFactory {
         .setAlgorithm(HMAC_SHA256)
         .setEncoding(BaseEncoding.base64())
         .build();
-  }
-
-  private static LimiterManager createLimiterManager() {
-    return LimiterManagers.forRules(
-        GetMarketBooks.RATE_LIMIT_RULE,
-        GetMarketCandles.RATE_LIMIT_RULE,
-        GetMarketHistoryCandles.RATE_LIMIT_RULE,
-        GetMarketIndexCandles.RATE_LIMIT_RULE,
-        GetMarketMarkPriceCandles.RATE_LIMIT_RULE,
-        GetMarketTickers.RATE_LIMIT_RULE,
-        GetMarketTicker.RATE_LIMIT_RULE,
-        GetMarketTrades.RATE_LIMIT_RULE,
-        GetMarketTradesHistory.RATE_LIMIT_RULE,
-        GetInstruments.RATE_LIMIT_RULE,
-        GetAccountInterestRate.RATE_LIMIT_RULE,
-        GetFundingRate.RATE_LIMIT_RULE,
-        GetAccountAccountPositionRisk.RATE_LIMIT_RULE,
-        GetAccountBalance.RATE_LIMIT_RULE,
-        GetAccountConfig.RATE_LIMIT_RULE,
-        GetAccountLeverageInfo.RATE_LIMIT_RULE,
-        GetAccountMaxLoan.RATE_LIMIT_RULE,
-        GetAccountPositions.RATE_LIMIT_RULE,
-        GetAccountFeeRate.RATE_LIMIT_RULE,
-        GetAccountRateLimits.RATE_LIMIT_RULE,
-        GetAssetBalances.RATE_LIMIT_RULE,
-        GetTradeFills.RATE_LIMIT_RULE,
-        GetTradeFillsHistory.RATE_LIMIT_RULE,
-        GetTradeOrder.RATE_LIMIT_RULE,
-        GetTradeOrderHistory.RATE_LIMIT_RULE,
-        GetTradeOrderHistoryArchive.RATE_LIMIT_RULE,
-        GetTradeOrdersPending.RATE_LIMIT_RULE,
-        GetSystemTime.RATE_LIMIT_RULE,
-        PostAccountSetLeverage.RATE_LIMIT_RULE,
-        PostAccountSetPositionMode.RATE_LIMIT_RULE,
-        PostTradeCancelOrder.RATE_LIMIT_RULE,
-        PostTradeOrder.RATE_LIMIT_RULE,
-        PostEasyConvert.RATE_LIMIT_RULE,
-        WebSocketApi.RATE_LIMIT_RULE);
   }
 
   @ThreadSafe

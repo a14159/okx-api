@@ -61,4 +61,8 @@ public class _Position {
   public BigDecimal getPos() {
     return Util.parseString(pos, BigDecimal.ZERO);
   }
+
+  public BigDecimal getAvailablePos() {
+    return Util.parseString(availPos, BigDecimal.ZERO);
+  }
 }

@@ -1,7 +1,6 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Position {
@@ -46,23 +45,23 @@ public class _Position {
   public String vegaBS;
   public String vegaPA;
 
-  public BigDecimal getAvgPx() {
-    return Util.parseString(avgPx, BigDecimal.ZERO);
+  public Double getAvgPx() {
+    return Util.parseString(avgPx, 0.0);
   }
 
-  public BigDecimal getMarkPx() {
-    return Util.parseString(markPx, BigDecimal.ZERO);
+  public Double getMarkPx() {
+    return Util.parseString(markPx, 0.0);
   }
 
-  public BigDecimal getMmr() {
-    return Util.parseString(mmr, BigDecimal.ZERO);
+  public Double getMmr() {
+    return Util.parseString(mmr, 0.0);
   }
 
-  public BigDecimal getPos() {
-    return Util.parseString(pos, BigDecimal.ZERO);
+  public Double getPos() {
+    return Util.parseString(pos, 0.0);
   }
 
-  public BigDecimal getAvailablePos() {
-    return Util.parseString(availPos, BigDecimal.ZERO);
+  public Double getAvailablePos() {
+    return Util.parseString(availPos, 0.0);
   }
 }

@@ -1,14 +1,13 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _FundingRate {
-    public BigDecimal fundingRate;
+    public Double fundingRate;
     public long fundingTime;
     public String instId;
     public String instType;
-    public BigDecimal nextFundingRate;
+    public Double nextFundingRate;
     public long nextFundingTime;
 }

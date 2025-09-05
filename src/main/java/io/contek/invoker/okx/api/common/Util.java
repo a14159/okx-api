@@ -1,13 +1,12 @@
 package io.contek.invoker.okx.api.common;
 
-import java.math.BigDecimal;
 
 public final class Util {
 
-    public static BigDecimal parseString(String s, BigDecimal defaultVal) {
+    public static Double parseString(String s, double defaultVal) {
         if (s == null || s.isEmpty())
             return defaultVal;
-        return new BigDecimal(s);
+        return Double.parseDouble(s);
     }
 
     public static long parseString(String s, long defaultVal) {

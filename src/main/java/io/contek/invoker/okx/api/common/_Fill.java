@@ -1,7 +1,6 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Fill {
@@ -13,13 +12,13 @@ public class _Fill {
   public String clOrdId;
   public String billId;
   public String tag;
-  public BigDecimal fillPx;
-  public BigDecimal fillSz;
+  public Double fillPx;
+  public Double fillSz;
   public String side;
   public String posSide;
   public String execType;
   public String feeCcy;
-  public BigDecimal fee;
+  public Double fee;
   public long ts;
   public long fillTime;
   public long traceNano = System.nanoTime();

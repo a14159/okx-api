@@ -1,7 +1,6 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Instrument {
@@ -21,24 +20,24 @@ public class _Instrument {
   public String listTime;
   public String expTime;
   public String lever;
-  public BigDecimal tickSz;
-  public BigDecimal lotSz;
-  public BigDecimal minSz;
-  public BigDecimal maxLmtSz;
+  public Double tickSz;
+  public Double lotSz;
+  public Double minSz;
+  public Double maxLmtSz;
   public String maxMktSz;
   public String ctType;
   public String alias;
   public String state;
 
-  public BigDecimal getCtVal() {
-    return Util.parseString(ctVal, BigDecimal.ONE);
+  public Double getCtVal() {
+    return Util.parseString(ctVal, 1.0);
   }
 
-  public BigDecimal getCtMult() {
-    return Util.parseString(ctMult, BigDecimal.ONE);
+  public Double getCtMult() {
+    return Util.parseString(ctMult, 1.0);
   }
 
-  public BigDecimal getMaxMktSz() {
-    return Util.parseString(maxMktSz, BigDecimal.valueOf(1000000000000000000L));
+  public Double getMaxMktSz() {
+    return Util.parseString(maxMktSz, Double.MAX_VALUE);
   }
 }

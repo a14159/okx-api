@@ -1,26 +1,25 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 @NotThreadSafe
 public class _OrderBookLevel extends ArrayList<String> {
 
-    private BigDecimal price = null;
-    private BigDecimal qty = null;
+    private Double price = null;
+    private Double qty = null;
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         if (price != null)
             return price;
-        price = new BigDecimal(get(0));
+        price = new Double(get(0));
         return price;
     }
 
-    public BigDecimal getQty() {
+    public Double getQty() {
         if (qty != null)
             return qty;
-        qty = new BigDecimal(get(1));
+        qty = new Double(get(1));
         return qty;
     }
 

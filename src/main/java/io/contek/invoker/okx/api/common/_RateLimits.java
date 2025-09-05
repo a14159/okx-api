@@ -1,9 +1,7 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
-import static java.math.BigDecimal.ZERO;
 
 @NotThreadSafe
 public class _RateLimits {
@@ -14,11 +12,11 @@ public class _RateLimits {
     public Integer nextAccRateLimit;
     public long ts;
 
-    public BigDecimal getFillRatio() {
-        return Util.parseString(fillRatio, ZERO);
+    public Double getFillRatio() {
+        return Util.parseString(fillRatio, 0.0);
     }
 
-    public BigDecimal getMainFillRatio() {
-        return Util.parseString(mainFillRatio, ZERO);
+    public Double getMainFillRatio() {
+        return Util.parseString(mainFillRatio, 0.0);
     }
 }

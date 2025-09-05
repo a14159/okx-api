@@ -1,12 +1,11 @@
 package io.contek.invoker.okx.api.common;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
 @NotThreadSafe
 public class _Order {
 
-  public BigDecimal accFillSz;
+  public Double accFillSz;
   public String amendResult;
   public String avgPx;
   public long cTime;
@@ -17,11 +16,11 @@ public class _Order {
   public String execType;
   public String fee;
   public String feeCcy;
-  public BigDecimal fillFee;
+  public Double fillFee;
   public String fillFeeCcy;
   public String fillNotionalUsd;
   public String fillPx;
-  public BigDecimal fillSz;
+  public Double fillSz;
   public String fillTime;
   public String instId;
   public String instType;
@@ -40,7 +39,7 @@ public class _Order {
   public String slTriggerPx;
   public String slTriggerPxType;
   public String state;
-  public BigDecimal sz;
+  public Double sz;
   public String tag;
   public String tdMode;
   public String tgtCcy;
@@ -52,16 +51,16 @@ public class _Order {
   public long uTime;
   public long traceNano = System.nanoTime();
 
-  public BigDecimal getPx() {
-    return Util.parseString(px, BigDecimal.ZERO);
+  public Double getPx() {
+    return Util.parseString(px, 0.0);
   }
 
-  public BigDecimal getFillPx() {
-    return Util.parseString(fillPx, BigDecimal.ZERO);
+  public Double getFillPx() {
+    return Util.parseString(fillPx, 0.0);
   }
 
-  public BigDecimal getAvgPx() {
-    return Util.parseString(avgPx, BigDecimal.ZERO);
+  public Double getAvgPx() {
+    return Util.parseString(avgPx, 0.0);
   }
 
   public long getFillTime() {

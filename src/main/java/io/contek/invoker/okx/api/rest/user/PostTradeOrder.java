@@ -9,7 +9,6 @@ import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
 import static io.contek.invoker.commons.rest.RestMethod.POST;
 import static java.util.Objects.requireNonNull;
@@ -25,14 +24,14 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
   private String side;
   private String posSide;
   private String ordType;
-  private BigDecimal sz;
-  private BigDecimal px;
+  private String sz;
+  private String px;
   private Boolean reduceOnly;
   private String tgtCcy;
-  private BigDecimal tpTriggerPx;
-  private BigDecimal tpOrdPx;
-  private BigDecimal slTriggerPx;
-  private BigDecimal slOrdPx;
+  private String tpTriggerPx;
+  private String tpOrdPx;
+  private String slTriggerPx;
+  private String slOrdPx;
   private String quickMgnType;
 
   PostTradeOrder(IActor actor, RestContext context) {
@@ -79,32 +78,32 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
     return this;
   }
 
-  public PostTradeOrder setSz(BigDecimal sz) {
+  public PostTradeOrder setSz(String sz) {
     this.sz = sz;
     return this;
   }
 
-  public PostTradeOrder setPx(@Nullable BigDecimal px) {
+  public PostTradeOrder setPx(@Nullable String px) {
     this.px = px;
     return this;
   }
 
-  public PostTradeOrder setTpTriggerPx(@Nullable BigDecimal tpTriggerPx) {
+  public PostTradeOrder setTpTriggerPx(@Nullable String tpTriggerPx) {
     this.tpTriggerPx = tpTriggerPx;
     return this;
   }
 
-  public PostTradeOrder setTpOrdPx(@Nullable BigDecimal tpOrdPx) {
+  public PostTradeOrder setTpOrdPx(@Nullable String tpOrdPx) {
     this.tpOrdPx = tpOrdPx;
     return this;
   }
 
-  public PostTradeOrder setSlTriggerPx(@Nullable BigDecimal slTriggerPx) {
+  public PostTradeOrder setSlTriggerPx(@Nullable String slTriggerPx) {
     this.slTriggerPx = slTriggerPx;
     return this;
   }
 
-  public PostTradeOrder setSlOrdPx(@Nullable BigDecimal slOrdPx) {
+  public PostTradeOrder setSlOrdPx(@Nullable String slOrdPx) {
     this.slOrdPx = slOrdPx;
     return this;
   }
@@ -151,7 +150,7 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
     builder.add("ordType", ordType);
 
     requireNonNull(sz);
-    builder.add("sz", sz.toPlainString());
+    builder.add("sz", sz);
 
     if (ccy != null) {
       builder.add("ccy", ccy);
@@ -170,23 +169,23 @@ public final class PostTradeOrder extends UserRestRequest<PostTradeOrder.Respons
     }
 
     if (px != null) {
-      builder.add("px", px.toPlainString());
+      builder.add("px", px);
     }
 
     if (tpTriggerPx != null) {
-      builder.add("tpTriggerPx", tpTriggerPx.toPlainString());
+      builder.add("tpTriggerPx", tpTriggerPx);
     }
 
     if (tpOrdPx != null) {
-      builder.add("tpOrdPx", tpOrdPx.toPlainString());
+      builder.add("tpOrdPx", tpOrdPx);
     }
 
     if (slTriggerPx != null) {
-      builder.add("slTriggerPx", slTriggerPx.toPlainString());
+      builder.add("slTriggerPx", slTriggerPx);
     }
 
     if (slOrdPx != null) {
-      builder.add("slOrdPx", slOrdPx.toPlainString());
+      builder.add("slOrdPx", slOrdPx);
     }
 
     if (reduceOnly != null) {

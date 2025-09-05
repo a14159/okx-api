@@ -12,7 +12,6 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -53,15 +52,15 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     }
   }
 
-  public int placeLimitOrder(String market, String tdMode, String clientId, String side, BigDecimal price, BigDecimal qty) {
+  public int placeLimitOrder(String market, String tdMode, String clientId, String side, String price, String qty) {
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
     postArg.ordType = OrderTypeKeys._limit;
     postArg.tdMode = tdMode;
     postArg.side = side;
-    postArg.px = price.toPlainString();
-    postArg.sz = qty.toPlainString();
+    postArg.px = price;
+    postArg.sz = qty;
     postArg.stpId = 1;
     postArg.stpMode = StpModeKeys._cancel_taker;
     if (_SPOT.equals(marketType))
@@ -80,14 +79,14 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     return -1;
   }
 
-  public int placeMarketOrder(String market, String tdMode, String clientId, String side, BigDecimal qty) {
+  public int placeMarketOrder(String market, String tdMode, String clientId, String side, String qty) {
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
     postArg.ordType = OrderTypeKeys._market;
     postArg.tdMode = tdMode;
     postArg.side = side;
-    postArg.sz = qty.toPlainString();
+    postArg.sz = qty;
     postArg.stpId = 1;
     postArg.stpMode = StpModeKeys._cancel_taker;
     if (_SPOT.equals(marketType))
@@ -107,13 +106,13 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
   }
 
 
-  public int amendOrder(String market, String ordId, String clientId, BigDecimal price, BigDecimal qty) {
+  public int amendOrder(String market, String ordId, String clientId, String price, String qty) {
     WebSocketAmendOrderArg postArg = new WebSocketAmendOrderArg();
     postArg.instId = market;
     postArg.ordId = ordId;
     postArg.clOrdId = clientId;
-    postArg.newPx = price.toPlainString();
-    postArg.newSz = qty.toPlainString();
+    postArg.newPx = price;
+    postArg.newSz = qty;
     WebSocketOrderRequest<WebSocketAmendOrderArg> request = new WebSocketOrderRequest<>();
     int rez = messageId.incrementAndGet();
     request.id = Integer.toString(rez);

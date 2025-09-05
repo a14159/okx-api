@@ -9,7 +9,6 @@ import io.contek.invoker.okx.api.rest.common.ResponseWrapper;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
-import java.math.BigDecimal;
 
 import static io.contek.invoker.commons.rest.RestMethod.POST;
 import static java.util.Objects.requireNonNull;
@@ -21,8 +20,8 @@ public final class PostAmendOrder extends UserRestRequest<PostAmendOrder.Respons
   private String ordId;
   private String clOrdId;
   private Boolean cxlOnFail;
-  private BigDecimal newSz;
-  private BigDecimal newPx;
+  private String newSz;
+  private String newPx;
 
   PostAmendOrder(IActor actor, RestContext context) {
     super(actor, context);
@@ -48,12 +47,12 @@ public final class PostAmendOrder extends UserRestRequest<PostAmendOrder.Respons
     return this;
   }
 
-  public PostAmendOrder setNewSz(BigDecimal newSz) {
+  public PostAmendOrder setNewSz(String newSz) {
     this.newSz = newSz;
     return this;
   }
 
-  public PostAmendOrder setNewPx(@Nullable BigDecimal newPx) {
+  public PostAmendOrder setNewPx(@Nullable String newPx) {
     this.newPx = newPx;
     return this;
   }
@@ -88,11 +87,11 @@ public final class PostAmendOrder extends UserRestRequest<PostAmendOrder.Respons
     }
 
     if (newSz != null) {
-      builder.add("newSz", newSz.toPlainString());
+      builder.add("newSz", newSz);
     }
 
     if (newPx != null) {
-      builder.add("newPx", newPx.toPlainString());
+      builder.add("newPx", newPx);
     }
 
     return builder.build();

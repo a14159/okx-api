@@ -12,14 +12,14 @@ public class _OrderBookLevel extends ArrayList<String> {
     public Double getPrice() {
         if (price != null)
             return price;
-        price = new Double(get(0));
+        price = Double.parseDouble(get(0));
         return price;
     }
 
     public Double getQty() {
         if (qty != null)
             return qty;
-        qty = new Double(get(1));
+        qty = Double.parseDouble(get(1));
         return qty;
     }
 

@@ -49,6 +49,10 @@ public class _Position {
     return Util.parseString(avgPx, 0.0);
   }
 
+  public Double getUpl() {
+    return Util.parseString(upl, 0.0);
+  }
+
   public Double getMarkPx() {
     return Util.parseString(markPx, 0.0);
   }

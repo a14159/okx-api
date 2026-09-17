@@ -48,6 +48,14 @@ public final class UserRestApi {
     return new GetAccountPositions(actor, context);
   }
 
+  public GetAccountBills getAccountBills() {
+    return new GetAccountBills(actor, context);
+  }
+
+  public GetAccountBillsArchive getAccountBillsArchive() {
+    return new GetAccountBillsArchive(actor, context);
+  }
+
   public GetAssetBalances getAssetBalances() {
     return new GetAssetBalances(actor, context);
   }

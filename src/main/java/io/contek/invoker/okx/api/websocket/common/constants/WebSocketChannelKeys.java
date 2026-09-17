@@ -27,6 +27,8 @@ public final class WebSocketChannelKeys {
 
   public static final String _positions = "positions";
 
+  public static final String _balance_and_position = "balance_and_position";
+
   public static final String _orders = "orders";
 
   public static final String _fills = "fills";

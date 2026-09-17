@@ -34,6 +34,17 @@ public final class PositionsChannel extends WebSocketUserChannel<PositionsChanne
     }
   }
 
+  /**
+   * A {@code positions} push. {@link #eventType} is {@code snapshot} for the initial and regular
+   * snapshot push and {@code event_update} for event-driven updates; {@link #curPage} and
+   * {@link #lastPage} are only present for snapshot pushes. The exchange timestamp is carried by
+   * {@link _Position#pTime} / {@link _Position#uTime}.
+   */
   @NotThreadSafe
-  public static final class Message extends WebSocketChannelPushData<_Position> {}
+  public static final class Message extends WebSocketChannelPushData<_Position> {
+
+    public String eventType;
+    public Integer curPage;
+    public Boolean lastPage;
+  }
 }

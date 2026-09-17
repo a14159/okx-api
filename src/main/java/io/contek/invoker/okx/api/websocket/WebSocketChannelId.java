@@ -24,6 +24,9 @@ public abstract class WebSocketChannelId<Message extends WebSocketChannelPushDat
   public abstract WebSocketChannelArg toChannelArg();
 
   private static String combine(String channel, String suffix) {
+    if (suffix == null || suffix.isEmpty()) {
+      return channel;
+    }
     return String.join(".", channel, suffix);
   }
 }

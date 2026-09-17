@@ -9,4 +9,5 @@ public final class WebSocketChannelArg {
   public String instType;
   public String uly;
   public String instId;
+  public String uid;
 }

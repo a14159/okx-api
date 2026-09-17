@@ -6,6 +6,7 @@ import io.contek.invoker.commons.websocket.IWebSocketComponent;
 import io.contek.invoker.commons.websocket.WebSocketTextMessageParser;
 import io.contek.invoker.okx.api.websocket.common.*;
 import io.contek.invoker.okx.api.websocket.market.*;
+import io.contek.invoker.okx.api.websocket.user.BalanceAndPositionChannel;
 import io.contek.invoker.okx.api.websocket.user.OrdersChannel;
 import io.contek.invoker.okx.api.websocket.user.OrdersEditChannel;
 import io.contek.invoker.okx.api.websocket.user.PositionsChannel;
@@ -79,6 +80,7 @@ final class WebSocketMessageParser extends WebSocketTextMessageParser {
         case _tickers -> obj.toJavaObject(TickersChannel.Message.class);
         case _orders -> obj.toJavaObject(OrdersChannel.Message.class);
         case _positions -> obj.toJavaObject(PositionsChannel.Message.class);
+        case _balance_and_position -> obj.toJavaObject(BalanceAndPositionChannel.Message.class);
         case _mark_price -> obj.toJavaObject(MarkPriceChannel.Message.class);
         case _index_tickers -> obj.toJavaObject(IndexTickersChannel.Message.class);
         default -> throw new IllegalArgumentException(obj.toString());

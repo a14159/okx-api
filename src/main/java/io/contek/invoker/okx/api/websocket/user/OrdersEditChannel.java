@@ -1,5 +1,6 @@
 package io.contek.invoker.okx.api.websocket.user;
 
+import io.contek.invoker.commons.websocket.WebSocketSession;
 import io.contek.invoker.okx.api.common._WSOrderEditAck;
 import io.contek.invoker.okx.api.common.constants.OrderTypeKeys;
 import io.contek.invoker.okx.api.common.constants.StpModeKeys;
@@ -53,10 +54,28 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
   }
 
   public int placeLimitOrder(String market, String tdMode, String clientId, String side, String price, String qty) {
+    return placeLimitOrder(market, tdMode, clientId, side, price, qty, false, false);
+  }
+
+  /**
+   * Places a limit order, optionally post-only and/or reduce-only.
+   *
+   * <p>A post-only order never takes liquidity; OKX cancels it if it would cross the book.
+   *
+   * <p>OKX only supports reduce-only for MARGIN orders and FUTURES/SWAP orders in net mode
+   * (Futures mode or Multi-currency margin). For SPOT the flag is ignored with a warning.
+   */
+  public int placeLimitOrder(String market, String tdMode, String clientId, String side, String price, String qty,
+                            boolean postOnly, boolean reduceOnly) {
+    if (reduceOnly && _SPOT.equals(marketType)) {
+      log.warn("Ignoring reduceOnly for SPOT limit order {}: reduceOnly is not supported for SPOT", clientId);
+      reduceOnly = false;
+    }
     WebSocketPostOrderArg postArg = new WebSocketPostOrderArg();
     postArg.clOrdId = clientId;
     postArg.instId = market;
-    postArg.ordType = OrderTypeKeys._limit;
+    postArg.ordType = postOnly ? OrderTypeKeys._post_only : OrderTypeKeys._limit;
+    postArg.reduceOnly = reduceOnly;
     postArg.tdMode = tdMode;
     postArg.side = side;
     postArg.px = price;
@@ -72,11 +91,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._order;
-    if (session != null) {
-      session.send(request);
-      return rez;
-    } else log.warn("Trying to place a limit order but we don't have the session");
-    return -1;
+    return sendOrWarn(request, rez, "Trying to place a limit order but we don't have the session");
   }
 
   public int placeMarketOrder(String market, String tdMode, String clientId, String side, String qty) {
@@ -98,11 +113,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._order;
-    if (session != null) {
-      session.send(request);
-      return rez;
-    } else log.warn("Trying to place a market order but we don't have the session");
-    return -1;
+    return sendOrWarn(request, rez, "Trying to place a market order but we don't have the session");
   }
 
 
@@ -118,11 +129,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._amend;
-    if (session != null) {
-      session.send(request);
-      return rez;
-    } else log.warn("Trying to place a limit order but we don't have the session");
-    return -1;
+    return sendOrWarn(request, rez, "Trying to amend an order but we don't have the session");
   }
 
   public int cancelOrder(String market, String clientId) {
@@ -134,11 +141,7 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._cancel;
-    if (session != null) {
-      session.send(request);
-      return rez;
-    } else log.warn("Trying to cancel an order but we don't have the session");
-    return -1;
+    return sendOrWarn(request, rez, "Trying to cancel an order but we don't have the session");
   }
 
   public int cancelOrderById(String market, String orderId) {
@@ -150,11 +153,17 @@ public final class OrdersEditChannel extends WebSocketUserChannelNoSubscribe<Ord
     request.id = Integer.toString(rez);
     request.args = List.of(postArg);
     request.op = WebSocketOrderOpKeys._cancel;
-    if (session != null) {
-      session.send(request);
-      return rez;
-    } else log.warn("Trying to cancel an order but we don't have the session");
-    return -1;
+    return sendOrWarn(request, rez, "Trying to cancel an order but we don't have the session");
+  }
+
+  private int sendOrWarn(WebSocketOrderRequest<?> request, int requestId, String warning) {
+    final WebSocketSession currentSession = session; // read once: a disconnect can reset it concurrently
+    if (currentSession == null) {
+      log.warn(warning);
+      return -1;
+    }
+    currentSession.send(request);
+    return requestId;
   }
 
   @NotThreadSafe

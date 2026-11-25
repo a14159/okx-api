@@ -45,6 +45,11 @@ public abstract class RestRequest<R extends ResponseWrapper<?>> extends BaseRest
 
   protected abstract RestParams getParams();
 
+  // POST body; requests whose body is not a JSON object of getParams() override it.
+  protected RestMediaBody getBody() {
+    return JSON.createBody(getParams());
+  }
+
   @Override
   protected final RestCall createCall(ICredential credential) {
     RestMethod method = getMethod();
@@ -58,7 +63,7 @@ public abstract class RestRequest<R extends ResponseWrapper<?>> extends BaseRest
             .build();
       }
       case POST -> {
-        RestMediaBody body = JSON.createBody(getParams());
+        RestMediaBody body = getBody();
         return RestCall.newBuilder()
             .setUrl(buildUrlString(""))
             .setMethod(method)

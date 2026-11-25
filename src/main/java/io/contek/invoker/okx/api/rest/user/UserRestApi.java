@@ -100,6 +100,10 @@ public final class UserRestApi {
     return new PostTradeCancelOrder(actor, context);
   }
 
+  public PostTradeCancelBatchOrders postTradeCancelBatchOrders() {
+    return new PostTradeCancelBatchOrders(actor, context);
+  }
+
   public PostTradeOrder postTradeOrder() {
     return new PostTradeOrder(actor, context);
   }
